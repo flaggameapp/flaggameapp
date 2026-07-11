@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Flag Game</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="topo">
+      <div class="logo">🌍 Flag Game</div>
+
+      <select id="idioma" aria-label="Selecionar idioma">
+  <option value="pt-BR">🇧🇷 Português</option>
+  <option value="en">🇺🇸 English</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="nl">🇳🇱 Nederlands</option>
+  <option value="pl">🇵🇱 Polski</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="uk">🇺🇦 Українська</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="ar">🇸🇦 العربية</option>
+  <option value="hi">🇮🇳 हिन्दी</option>
+  <option value="bn">🇧🇩 বাংলা</option>
+  <option value="zh-CN">🇨🇳 中文</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="ko">🇰🇷 한국어</option>
+  <option value="id">🇮🇩 Bahasa Indonesia</option>
+  <option value="vi">🇻🇳 Tiếng Việt</option>
+  <option value="th">🇹🇭 ไทย</option>
+</select>
+    </header>
+
+    <section class="inicio">
+      <h1 data-i18n="homeTitle">Aprenda as bandeiras do mundo</h1>
+
+      <p data-i18n="homeSubtitle">
+  Teste seus conhecimentos sobre os 195 países.
+</p>
+
+      <div class="modos">
+
+  <button class="modo" id="btn-continentes">
+    <span class="icone">🌎</span>
+    <strong data-i18n="modeContinent">Por continente</strong>
+    <small data-i18n="modeContinentDescription">
+      Aprenda com alternativas
+    </small>
+  </button>
+
+  <button class="modo" id="btn-mundo">
+    <span class="icone">🌍</span>
+    <strong data-i18n="modeWorld">Mundo inteiro</strong>
+    <small data-i18n="modeWorldDescription">
+      Desafie seus conhecimentos
+    </small>
+  </button>
+
+  <button class="modo" id="btn-experiente">
+    <span class="icone">🏆</span>
+    <strong data-i18n="modeExpert">Modo Experiente</strong>
+    <small data-i18n="modeExpertDescription">
+      Digite os países contra o tempo
+    </small>
+  </button>
+
+</div>
+    </section>
+<section class="tela-mundo" id="tela-mundo">
+
+  <button class="voltar" id="btn-voltar-mundo" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="worldGameTitle">
+    Mundo inteiro
+  </h1>
+
+  <p data-i18n="worldGameSubtitle">
+    Quantas bandeiras você quer tentar acertar?
+  </p>
+
+  <div class="opcoes-quantidade">
+
+    <button class="quantidade" data-quantidade="10">
+      <strong>10</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="20">
+      <strong>20</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="50">
+      <strong>50</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="195">
+      <strong>195</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+  </div>
+
+</section>
+
+<section class="tela-experiente" id="tela-experiente">
+
+  <div class="experiente-topo">
+
+    <button
+      class="voltar"
+      id="btn-sair-experiente"
+      data-i18n="exit"
+    >
+      ← Sair
+    </button>
+
+    <div class="experiente-status">
+
+      <div class="experiente-progresso">
+        <span id="experiente-progresso">1 / 195</span>
+      </div>
+
+      <div class="experiente-cronometro">
+        ⏱️ <strong id="experiente-tempo">00:00</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="experiente-conteudo">
+
+    <div class="experiente-marca">
+      🏆 <span data-i18n="expertModeTitle">Modo Experiente</span>
+    </div>
+
+    <div class="experiente-bandeira">
+      <img
+        id="experiente-bandeira"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <p class="experiente-pergunta" data-i18n="expertQuestion">
+      Qual é este país?
+    </p>
+
+    <form id="form-experiente" class="experiente-form">
+
+      <input
+        type="text"
+        id="experiente-resposta"
+        data-i18n-placeholder="expertPlaceholder"
+        placeholder="Digite o nome do país..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button type="submit" class="btn-principal" data-i18n="answer">
+        Responder
+      </button>
+
+    </form>
+
+    <div
+      class="experiente-feedback"
+      id="experiente-feedback"
+    ></div>
+
+    <button
+      class="btn-pular"
+      id="btn-pular"
+      data-i18n="skip"
+    >
+      Não sei / Pular
+    </button>
+
+    <div class="experiente-estatisticas">
+
+      <div>
+        <strong id="experiente-acertos">0</strong>
+        <span data-i18n="correctAnswers">Acertos</span>
+      </div>
+
+      <div>
+        <strong id="experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="experiente-sequencia">0</strong>
+        <span data-i18n="streak">Sequência</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  class="tela-resultado-experiente"
+  id="tela-resultado-experiente"
+>
+
+  <div class="resultado-experiente-card">
+
+    <div class="resultado-experiente-icone">🏆</div>
+
+    <h1 data-i18n="expertCompleted">
+      Desafio concluído!
+    </h1>
+
+    <p data-i18n="expertCompletedSubtitle">
+      Você enfrentou as 195 bandeiras do mundo.
+    </p>
+
+    <div class="resultado-experiente-destaque">
+      <strong id="resultado-experiente-acertos">0</strong>
+      <span>/ 195</span>
+    </div>
+
+    <div class="resultado-experiente-grid">
+
+      <div>
+        <strong id="resultado-experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="resultado-experiente-tempo">00:00</strong>
+        <span data-i18n="totalTime">Tempo total</span>
+      </div>
+
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-reiniciar-experiente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-menu-experiente"
+        data-i18n="backToMenu"
+      >
+        🏠 Voltar ao menu
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <section class="tela-continentes" id="tela-continentes">
+
+  <button class="voltar" id="btn-voltar" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="chooseContinent">Escolha um continente</h1>
+
+  <p data-i18n="chooseContinentSubtitle">
+    Qual parte do mundo você quer explorar?
+  </p>
+
+  <div class="continentes">
+
+    <button class="continente" data-continente="south-america">
+      <span>🌎</span>
+      <strong data-i18n="southAmerica">América do Sul</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="north-america">
+      <span>🌎</span>
+      <strong data-i18n="northAmerica">América do Norte e Central</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="europe">
+      <span>🌍</span>
+      <strong data-i18n="europe">Europa</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="africa">
+      <span>🌍</span>
+      <strong data-i18n="africa">África</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="asia">
+      <span>🌏</span>
+      <strong data-i18n="asia">Ásia</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="oceania">
+      <span>🌏</span>
+      <strong data-i18n="oceania">Oceania</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="tela-jogo" id="tela-jogo">
+
+  <div class="jogo-topo">
+
+    <button class="voltar" id="btn-sair-jogo" data-i18n="exit">
+      ← Sair
+    </button>
+
+    <div class="placar">
+      <span id="progresso">1 / 4</span>
+      <strong id="pontos">0 pontos</strong>
+    </div>
+
+  </div>
+
+  <div class="pergunta">
+
+    <p data-i18n="question">
+      De qual país é esta bandeira?
+    </p>
+
+    <div class="bandeira">
+      <img
+        id="bandeira-atual"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <div class="alternativas" id="alternativas"></div>
+
+  </div>
+
+</section>
+
+
+  <section class="tela-resultado" id="tela-resultado">
+
+  <div class="resultado-card">
+
+    <div class="resultado-icone" id="resultado-icone">🏆</div>
+
+    <h1 data-i18n="gameCompleted">
+      Partida concluída!
+    </h1>
+
+    <p class="resultado-mensagem" id="resultado-mensagem">
+      Excelente resultado!
+    </p>
+
+    <div class="resultado-numero">
+      <strong id="resultado-pontos">0</strong>
+      <span id="resultado-total">/ 4</span>
+    </div>
+
+    <div class="resultado-percentual" id="resultado-percentual">
+      0% de acertos
+    </div>
+
+    <div
+      class="resultado-recorde"
+      id="resultado-recorde"
+      data-i18n="newRecord"
+    >
+      🏅 Novo recorde!
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-jogar-novamente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-outro-continente"
+        data-i18n="chooseAnotherContinent"
+      >
+        🌍 Escolher outro continente
+      </button>
+
+    </div>
+
+  </div>
+<!-- =========================
+     RODAPÉ
+========================= -->
+
+<footer class="app-footer">
+
+  <button
+    class="footer-link"
+    id="btn-support"
+    data-i18n="supportProject">
+    ❤️ Ajude a manter este projeto gratuito
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-about"
+    data-i18n="about">
+    ℹ️ Sobre
+  </button>
+
+  <div class="app-version">
+    <span data-i18n="version">Versão</span>
+    <strong>1.0.0</strong>
+  </div>
+
+</footer>
+
+</section>
+
+
+</section>
+<!-- =========================
+     SUPPORT
+========================= -->
+
+<section
+  class="tela-support"
+  id="tela-support">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-support"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="supportTitle">
+      ❤️ Apoie o Flag Game
+    </h1>
+
+    <div id="support-content">
+
+      <!-- Conteúdo será criado
+           na próxima etapa -->
+
+    </div>
+
+  </div>
+
+  
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+  class="tela-about"
+  id="tela-about">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-about"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="about">
+      ℹ️ Sobre
+    </h1>
+
+    <div id="about-content">
+
+      <!-- Conteúdo será criado
+           na próxima etapa -->
+
+    </div>
+
+  </div>
+
+</section>
+  </main>
+
+<script src="js/countries.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
