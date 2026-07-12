@@ -61,7 +61,7 @@ async function loadLanguage(language) {
     translations = await response.json();
     currentLanguage = language;
 
-    localStorage.setItem("language", language);
+    FlagGameStorage.setString("language", language);
 
     document.documentElement.lang = language;
     document.documentElement.dir =
@@ -82,7 +82,9 @@ async function loadLanguage(language) {
 }
 
 function t(key) {
-  return translations[key] || key;
+  return Object.prototype.hasOwnProperty.call(translations, key)
+    ? translations[key]
+    : key;
 }
 
 function getCountryName(countryCode) {
@@ -109,8 +111,38 @@ function applyTranslations() {
     .forEach(element => {
       const key = element.dataset.i18n;
 
-      if (translations[key]) {
+      if (Object.prototype.hasOwnProperty.call(translations, key)) {
         element.textContent = translations[key];
+      }
+    });
+
+  document
+    .querySelectorAll("[data-i18n-placeholder]")
+    .forEach(element => {
+      const key = element.dataset.i18nPlaceholder;
+
+      if (Object.prototype.hasOwnProperty.call(translations, key)) {
+        element.placeholder = translations[key];
+      }
+    });
+
+  document
+    .querySelectorAll("[data-i18n-aria-label]")
+    .forEach(element => {
+      const key = element.dataset.i18nAriaLabel;
+
+      if (Object.prototype.hasOwnProperty.call(translations, key)) {
+        element.setAttribute("aria-label", translations[key]);
+      }
+    });
+
+  document
+    .querySelectorAll("[data-i18n-title]")
+    .forEach(element => {
+      const key = element.dataset.i18nTitle;
+
+      if (Object.prototype.hasOwnProperty.call(translations, key)) {
+        element.title = translations[key];
       }
     });
 
@@ -137,11 +169,15 @@ function applyTranslations() {
           getCountryName(countryCode);
       }
     });
+
+  if (typeof atualizarBotaoSom === "function") {
+    atualizarBotaoSom();
+  }
 }
 
 async function initializeLanguage() {
   const savedLanguage =
-    localStorage.getItem("language");
+    FlagGameStorage.getString("language", "");
 
   const initialLanguage =
     savedLanguage || detectBrowserLanguage();
