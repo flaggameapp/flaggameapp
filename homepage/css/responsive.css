@@ -1,6 +1,6 @@
 @media (min-width: 48rem) {
   .site-header__inner {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
   }
 
   .no-js .site-nav {
