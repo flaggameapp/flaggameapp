@@ -13,32 +13,32 @@ const FlagGameProfile = (() => {
   const ACHIEVEMENTS = [
     {
       id: "first-win",
-      title: "Primeira vitória",
-      description: "Conclua sua primeira partida.",
+      titleKey: "achievementFirstWinTitle",
+      descriptionKey: "achievementFirstWinDescription",
       points: 10,
       isUnlocked: profile => profile.totals.gamesPlayed >= 1,
       getProgress: profile => progress(profile.totals.gamesPlayed, 1)
     },
     {
       id: "100-correct",
-      title: "100 acertos",
-      description: "Some 100 respostas corretas.",
+      titleKey: "achievement100CorrectTitle",
+      descriptionKey: "achievement100CorrectDescription",
       points: 25,
       isUnlocked: profile => profile.totals.totalCorrect >= 100,
       getProgress: profile => progress(profile.totals.totalCorrect, 100)
     },
     {
       id: "1000-correct",
-      title: "1000 acertos",
-      description: "Some 1000 respostas corretas.",
+      titleKey: "achievement1000CorrectTitle",
+      descriptionKey: "achievement1000CorrectDescription",
       points: 100,
       isUnlocked: profile => profile.totals.totalCorrect >= 1000,
       getProgress: profile => progress(profile.totals.totalCorrect, 1000)
     },
     {
       id: "all-continents",
-      title: "Todos os continentes",
-      description: "Conclua partidas em todos os continentes.",
+      titleKey: "achievementAllContinentsTitle",
+      descriptionKey: "achievementAllContinentsDescription",
       points: 75,
       isUnlocked: profile =>
         CONTINENTS.every(continent =>
@@ -53,52 +53,52 @@ const FlagGameProfile = (() => {
     },
     {
       id: "195-flags",
-      title: "195 bandeiras",
-      description: "Conclua um desafio com as 195 bandeiras.",
+      titleKey: "achievement195FlagsTitle",
+      descriptionKey: "achievement195FlagsDescription",
       points: 75,
       isUnlocked: profile => profile.totals.fullRuns195 >= 1,
       getProgress: profile => progress(profile.totals.fullRuns195, 1)
     },
     {
       id: "10-perfect-games",
-      title: "10 partidas perfeitas",
-      description: "Complete 10 partidas com 100% de acertos.",
+      titleKey: "achievement10PerfectGamesTitle",
+      descriptionKey: "achievement10PerfectGamesDescription",
       points: 80,
       isUnlocked: profile => profile.totals.perfectGames >= 10,
       getProgress: profile => progress(profile.totals.perfectGames, 10)
     },
     {
       id: "50-games",
-      title: "50 partidas",
-      description: "Jogue 50 partidas.",
+      titleKey: "achievement50GamesTitle",
+      descriptionKey: "achievement50GamesDescription",
       points: 60,
       isUnlocked: profile => profile.totals.gamesPlayed >= 50,
       getProgress: profile => progress(profile.totals.gamesPlayed, 50)
     },
     continentExpertAchievement(
       "expert-europe",
-      "Especialista em Europa",
+      "achievementExpertEuropeTitle",
       "europe"
     ),
     continentExpertAchievement(
       "expert-africa",
-      "Especialista em África",
+      "achievementExpertAfricaTitle",
       "africa"
     ),
     continentExpertAchievement(
       "expert-asia",
-      "Especialista em Ásia",
+      "achievementExpertAsiaTitle",
       "asia"
     ),
     continentExpertAchievement(
       "expert-oceania",
-      "Especialista em Oceania",
+      "achievementExpertOceaniaTitle",
       "oceania"
     ),
     {
       id: "expert-america",
-      title: "Especialista em América",
-      description: "Faça 100% na América do Sul e na América do Norte e Central.",
+      titleKey: "achievementExpertAmericaTitle",
+      descriptionKey: "achievementExpertAmericaDescription",
       points: 60,
       isUnlocked: profile =>
         profile.continentsPerfect["south-america"] &&
@@ -115,11 +115,11 @@ const FlagGameProfile = (() => {
     }
   ];
 
-  function continentExpertAchievement(id, title, continent) {
+  function continentExpertAchievement(id, titleKey, continent) {
     return {
       id,
-      title,
-      description: "Faça 100% em uma partida deste continente.",
+      titleKey,
+      descriptionKey: "achievementContinentExpertDescription",
       points: 50,
       isUnlocked: profile => Boolean(
         profile.continentsPerfect[continent]
@@ -365,8 +365,10 @@ const FlagGameProfile = (() => {
 
     return {
       id: achievement.id,
-      title: achievement.title,
-      description: achievement.description,
+      title: t(achievement.titleKey),
+      description: t(achievement.descriptionKey),
+      titleKey: achievement.titleKey,
+      descriptionKey: achievement.descriptionKey,
       points: achievement.points,
       unlocked: Boolean(unlockedAt),
       unlockedAt,

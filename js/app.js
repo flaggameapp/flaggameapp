@@ -278,6 +278,29 @@ function getContinentLabel(continent) {
   return labels[continent] || t("worldLabel");
 }
 
+function getResultadoVisual(percentual) {
+  if (percentual === 100) {
+    return { icon: "🏆", messageKey: "perfect" };
+  }
+
+  if (percentual >= 75) {
+    return { icon: "🌟", messageKey: "excellent" };
+  }
+
+  if (percentual >= 50) {
+    return { icon: "👏", messageKey: "good" };
+  }
+
+  return { icon: "🌱", messageKey: "keepLearning" };
+}
+
+function atualizarMensagemResultado(percentual) {
+  const visual = getResultadoVisual(percentual);
+
+  resultadoIcone.textContent = visual.icon;
+  resultadoMensagem.textContent = t(visual.messageKey);
+}
+
 function desenharRetanguloArredondado(ctx, x, y, width, height, radius) {
   ctx.beginPath();
   ctx.moveTo(x + radius, y);
@@ -616,16 +639,59 @@ function renderizarResultadoDesafio(resultado) {
   challengeErrors.textContent = resultado.errors;
   challengeStreak.textContent = resultado.bestStreak;
 
+  atualizarComparacaoDesafio(resultado, bestResult);
+}
+
+function atualizarComparacaoDesafio(resultado, bestResult) {
+  const storedResult =
+    bestResult ||
+    (
+      desafioAtual &&
+      FlagGameChallenge.getLocalResult(desafioAtual.code) &&
+      FlagGameChallenge.getLocalResult(desafioAtual.code).bestResult
+    );
+
   if (
-    bestResult &&
-    bestResult.completedAt !== resultado.completedAt
+    storedResult &&
+    storedResult.completedAt !== resultado.completedAt
   ) {
     challengeComparison.textContent =
       `${t("localBestChallengeResult")} ` +
-      formatarResultadoDesafio(bestResult);
+      formatarResultadoDesafio(storedResult);
   } else {
     challengeComparison.textContent =
       t("challengeSharePrompt");
+  }
+}
+
+function refreshDynamicTranslations() {
+  if (
+    telaResultado.classList.contains("ativa") &&
+    perguntas.length
+  ) {
+    const percentual = Math.round(
+      (pontos / perguntas.length) * 100
+    );
+
+    resultadoPercentual.textContent =
+      `${percentual}% ${t("accuracy")}`;
+    atualizarMensagemResultado(percentual);
+    btnOutroContinente.textContent =
+      continenteAtual === "world"
+        ? t("backToMenu")
+        : t("chooseAnotherContinent");
+  }
+
+  if (ultimoResultadoDesafio) {
+    atualizarComparacaoDesafio(ultimoResultadoDesafio);
+  }
+
+  if (telaProfile.classList.contains("ativa")) {
+    renderizarPerfil();
+  }
+
+  if (telaAchievements.classList.contains("ativa")) {
+    renderizarConquistas();
   }
 }
 
@@ -1486,22 +1552,7 @@ function mostrarResultado() {
     profileResult.unlockedAchievements
   );
 
-  if (percentual === 100) {
-    resultadoIcone.textContent = "🏆";
-    resultadoMensagem.textContent = t("perfect");
-
-  } else if (percentual >= 75) {
-    resultadoIcone.textContent = "🌟";
-    resultadoMensagem.textContent = t("excellent");
-
-  } else if (percentual >= 50) {
-    resultadoIcone.textContent = "👏";
-    resultadoMensagem.textContent = t("good");
-
-  } else {
-    resultadoIcone.textContent = "🌱";
-    resultadoMensagem.textContent = t("keepLearning");
-  }
+  atualizarMensagemResultado(percentual);
 
   const chaveRecorde =
     `recorde-${continenteAtual}`;

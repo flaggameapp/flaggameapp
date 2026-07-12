@@ -146,6 +146,18 @@ function applyTranslations() {
       }
     });
 
+  document
+    .querySelectorAll("[data-i18n-alt]")
+    .forEach(element => {
+      const key = element.dataset.i18nAlt;
+
+      if (Object.prototype.hasOwnProperty.call(translations, key)) {
+        element.alt = translations[key];
+      }
+    });
+
+  document.title = t("appName");
+
   atualizarContadoresContinentes();
 
   // Atualiza o placar da partida aberta
@@ -172,6 +184,10 @@ function applyTranslations() {
 
   if (typeof atualizarBotaoSom === "function") {
     atualizarBotaoSom();
+  }
+
+  if (typeof refreshDynamicTranslations === "function") {
+    refreshDynamicTranslations();
   }
 }
 
