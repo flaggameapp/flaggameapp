@@ -391,6 +391,7 @@
     ];
     copy.final = [values[21], values[22], values[12], values[3]];
     copy.footerAria = values[19];
+    copy.footer = [values[23], values[3]];
     COPY[language] = copy;
   });
 
@@ -653,7 +654,12 @@
 
     setTexts(".final-cta .section-heading__eyebrow, .final-cta .section-heading__title, .final-cta p:not(.section-heading__eyebrow), .final-cta .button", copy.final);
     setText(".site-footer__text", copy.footer[0]);
-    setText('.site-footer__nav a[data-homepage-link="webGameUrl"]', copy.footer[1]);
+    setTexts(".site-footer__nav a:not([data-optional-link])", [
+      copy.footer[1],
+      copy.nav[0],
+      copy.nav[4],
+      copy.nav[5]
+    ]);
 
     const select = document.querySelector("#homepage-language");
 
