@@ -1,488 +1,1074 @@
-<!DOCTYPE html>
-<html class="no-js" lang="pt-BR">
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    document.documentElement.classList.replace("no-js", "js");
-  </script>
+  <base href="../">
 
-  <title>Flag Game - Aprenda as bandeiras dos 195 países</title>
-  <meta
-    name="description"
-    content="Jogue Flag Game e aprenda as bandeiras dos 195 países por continente, no mundo inteiro ou no modo experiente. Acompanhe progresso, conquistas e desafios."
-  >
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#2563eb">
+  <title>Flag Game</title>
 
-  <!-- Canonical URL intentionally omitted until the public URL is defined. -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <meta property="og:title" content="Flag Game">
+  <meta property="og:image" content="assets/images/logo.png">
 
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Flag Game">
-  <meta property="og:title" content="Flag Game - Aprenda as bandeiras dos 195 países">
-  <meta
-    property="og:description"
-    content="Um jogo educativo de bandeiras com modos por continente, mundo inteiro, modo experiente, progresso local, conquistas e desafios compartilháveis."
-  >
-  <meta property="og:image" content="homepage/assets/logo-homepage.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flag Game - Aprenda as bandeiras dos 195 países">
-  <meta
-    name="twitter:description"
-    content="Aprenda as bandeiras dos 195 países jogando no seu ritmo."
-  >
-  <meta name="twitter:image" content="homepage/assets/logo-homepage.png">
-
-  <link rel="icon" type="image/png" href="homepage/assets/logo-homepage.png">
-  <link rel="apple-touch-icon" href="homepage/assets/logo-homepage.png">
-
-  <link rel="stylesheet" href="homepage/css/tokens.css">
-  <link rel="stylesheet" href="homepage/css/base.css">
-  <link rel="stylesheet" href="homepage/css/components.css">
-  <link rel="stylesheet" href="homepage/css/sections.css">
-  <link rel="stylesheet" href="homepage/css/responsive.css">
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "name": "Flag Game",
-          "description": "Jogo educativo para aprender as bandeiras dos 195 países.",
-          "inLanguage": "pt-BR"
-        },
-        {
-          "@type": "VideoGame",
-          "name": "Flag Game",
-          "genre": ["Educational", "Geography"],
-          "description": "Jogo de bandeiras com modos por continente, mundo inteiro, modo experiente, progresso local, conquistas e desafios compartilháveis.",
-          "inLanguage": "pt-BR"
-        }
-      ]
-    }
-  </script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<body class="app-loading">
 
-  <header class="site-header" data-homepage-header>
-    <div class="container site-header__inner">
-      <a class="brand-link" href="#inicio" aria-label="Flag Game - início">
-        <img
-          class="brand-link__logo"
-          src="homepage/assets/logo-homepage.png"
-          alt="Flag Game"
-          width="360"
-          height="203"
-          decoding="async"
-          fetchpriority="high"
+  <div class="app-loader" id="app-loader" aria-live="polite">
+    <div></div>
+    <span data-i18n="loading">Carregando...</span>
+  </div>
+
+  <div
+    class="achievement-toast"
+    id="achievement-toast"
+    aria-live="polite"
+  ></div>
+
+  <main class="app">
+
+    <header class="topo">
+      <div class="logo">
+        <a
+          href="#home"
+          class="logo-home-link"
+          id="logo-home-link"
+          aria-label="Flag Game - Home"
         >
-      </a>
+          <img
+            src="assets/images/logo.png"
+            alt="Flag Game"
+            class="brand-logo"
+          >
+        </a>
+      </div>
 
-      <nav class="site-nav" aria-label="Navegação principal">
+      <div class="topo-controles">
+
+      <button
+        class="sound-toggle"
+        id="btn-som"
+        type="button"
+        aria-label="Ativar sons"
+        aria-pressed="false"
+      >
+        🔇
+      </button>
+
+      <select
+        id="idioma"
+        aria-label="Selecionar idioma"
+        data-i18n-aria-label="languageSelectLabel">
+  <option value="pt-BR">🇧🇷 Português</option>
+  <option value="en">🇺🇸 English</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="nl">🇳🇱 Nederlands</option>
+  <option value="pl">🇵🇱 Polski</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="uk">🇺🇦 Українська</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="ar">🇸🇦 العربية</option>
+  <option value="hi">🇮🇳 हिन्दी</option>
+  <option value="bn">🇧🇩 বাংলা</option>
+  <option value="zh-CN">🇨🇳 中文</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="ko">🇰🇷 한국어</option>
+  <option value="id">🇮🇩 Bahasa Indonesia</option>
+  <option value="vi">🇻🇳 Tiếng Việt</option>
+  <option value="th">🇹🇭 ไทย</option>
+</select>
+
+      </div>
+    </header>
+
+    <section class="inicio">
+      <h1 data-i18n="homeTitle">Aprenda as bandeiras do mundo</h1>
+
+      <p data-i18n="homeSubtitle">
+  Teste seus conhecimentos sobre os 195 países.
+</p>
+
+      <div class="modos">
+
+  <button class="modo" id="btn-continentes">
+    <span class="icone">🌎</span>
+    <strong data-i18n="modeContinent">Por continente</strong>
+    <small data-i18n="modeContinentDescription">
+      Aprenda com alternativas
+    </small>
+  </button>
+
+  <button class="modo" id="btn-mundo">
+    <span class="icone">🌍</span>
+    <strong data-i18n="modeWorld">Mundo inteiro</strong>
+    <small data-i18n="modeWorldDescription">
+      Desafie seus conhecimentos
+    </small>
+  </button>
+
+  <button class="modo" id="btn-experiente">
+    <span class="icone">🏆</span>
+    <strong data-i18n="modeExpert">Modo Experiente</strong>
+    <small data-i18n="modeExpertDescription">
+      Digite os países contra o tempo
+    </small>
+  </button>
+
+</div>
+
+      <div class="challenge-entry">
+        <strong data-i18n="challengeFriends">Desafio entre amigos</strong>
+        <div>
+          <input
+            type="text"
+            id="challenge-code-input"
+            placeholder="FG-W20-82K7P"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Código do desafio"
+            data-i18n-aria-label="challengeCodeLabel"
+          >
+          <button
+            class="btn-secundario"
+            id="btn-play-challenge"
+            data-i18n="playChallenge"
+          >
+            Jogar desafio
+          </button>
+        </div>
+        <span id="challenge-entry-feedback"></span>
+      </div>
+    </section>
+<section class="tela-mundo" id="tela-mundo">
+
+  <button class="voltar" id="btn-voltar-mundo" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="worldGameTitle">
+    Mundo inteiro
+  </h1>
+
+  <p data-i18n="worldGameSubtitle">
+    Quantas bandeiras você quer tentar acertar?
+  </p>
+
+  <div class="opcoes-quantidade">
+
+    <button class="quantidade" data-quantidade="10">
+      <strong>10</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="20">
+      <strong>20</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="50">
+      <strong>50</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="195">
+      <strong>195</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+  </div>
+
+</section>
+
+<section class="tela-experiente" id="tela-experiente">
+
+  <div class="experiente-topo">
+
+    <button
+      class="voltar"
+      id="btn-sair-experiente"
+      data-i18n="exit"
+    >
+      ← Sair
+    </button>
+
+    <div class="experiente-status">
+
+      <div class="experiente-progresso">
+        <span id="experiente-progresso">1 / 195</span>
+      </div>
+
+      <div class="experiente-cronometro">
+        ⏱️ <strong id="experiente-tempo">00:00</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="experiente-conteudo">
+
+    <div class="experiente-marca">
+      🏆 <span data-i18n="expertModeTitle">Modo Experiente</span>
+    </div>
+
+    <div class="experiente-bandeira">
+      <img
+        id="experiente-bandeira"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <p class="experiente-pergunta" data-i18n="expertQuestion">
+      Qual é este país?
+    </p>
+
+    <form id="form-experiente" class="experiente-form">
+
+      <input
+        type="text"
+        id="experiente-resposta"
+        data-i18n-placeholder="expertPlaceholder"
+        placeholder="Digite o nome do país..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button type="submit" class="btn-principal" data-i18n="answer">
+        Responder
+      </button>
+
+    </form>
+
+    <div
+      class="experiente-feedback"
+      id="experiente-feedback"
+    ></div>
+
+    <button
+      class="btn-pular"
+      id="btn-pular"
+      data-i18n="skip"
+    >
+      Não sei / Pular
+    </button>
+
+    <div class="experiente-estatisticas">
+
+      <div>
+        <strong id="experiente-acertos">0</strong>
+        <span data-i18n="correctAnswers">Acertos</span>
+      </div>
+
+      <div>
+        <strong id="experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="experiente-sequencia">0</strong>
+        <span data-i18n="streak">Sequência</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  class="tela-resultado-experiente"
+  id="tela-resultado-experiente"
+>
+
+  <div class="resultado-experiente-card">
+
+    <div class="resultado-experiente-icone">🏆</div>
+
+    <h1 data-i18n="expertCompleted">
+      Desafio concluído!
+    </h1>
+
+    <p data-i18n="expertCompletedSubtitle">
+      Você enfrentou as 195 bandeiras do mundo.
+    </p>
+
+    <div class="resultado-experiente-destaque">
+      <strong id="resultado-experiente-acertos">0</strong>
+      <span>/ 195</span>
+    </div>
+
+    <div class="resultado-experiente-grid">
+
+      <div>
+        <strong id="resultado-experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="resultado-experiente-tempo">00:00</strong>
+        <span data-i18n="totalTime">Tempo total</span>
+      </div>
+
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-reiniciar-experiente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-menu-experiente"
+        data-i18n="backToMenu"
+      >
+        🏠 Voltar ao menu
+      </button>
+
+    </div>
+
+    <div class="share-panel">
+      <h2 data-i18n="shareResult">Compartilhar resultado</h2>
+      <p data-i18n="shareResultPerformanceDescription">
+        Gere uma imagem bonita com seu desempenho, sem dados pessoais.
+      </p>
+
+      <div class="share-actions">
         <button
-          class="site-nav__toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="site-nav-list"
-          data-nav-toggle
+          class="btn-principal"
+          id="btn-share-experiente"
+          data-i18n="share"
         >
-          Menu
+          Compartilhar
         </button>
 
-        <ul class="site-nav__list" id="site-nav-list" data-nav-list>
-          <li><a href="#modos" data-section-link>Modos</a></li>
-          <li><a href="#progresso" data-section-link>Progresso</a></li>
-          <li><a href="#desafios" data-section-link>Desafios</a></li>
-          <li><a href="#idiomas" data-section-link>Idiomas</a></li>
-          <li><a href="#plataformas" data-section-link>Plataformas</a></li>
-          <li><a href="#faq" data-section-link>FAQ</a></li>
-        </ul>
-      </nav>
+        <button
+          class="btn-secundario"
+          id="btn-download-share-experiente"
+          data-i18n="downloadImage"
+        >
+          Baixar imagem
+        </button>
+      </div>
+
+      <span
+        class="share-feedback"
+        id="share-feedback-experiente"
+      ></span>
+    </div>
+
+  </div>
+
+</section>
+
+    <section class="tela-continentes" id="tela-continentes">
+
+  <button class="voltar" id="btn-voltar" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="chooseContinent">Escolha um continente</h1>
+
+  <p data-i18n="chooseContinentSubtitle">
+    Qual parte do mundo você quer explorar?
+  </p>
+
+  <div class="continentes">
+
+    <button class="continente" data-continente="south-america">
+      <span>🌎</span>
+      <strong data-i18n="southAmerica">América do Sul</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="north-america">
+      <span>🌎</span>
+      <strong data-i18n="northAmerica">América do Norte e Central</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="europe">
+      <span>🌍</span>
+      <strong data-i18n="europe">Europa</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="africa">
+      <span>🌍</span>
+      <strong data-i18n="africa">África</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="asia">
+      <span>🌏</span>
+      <strong data-i18n="asia">Ásia</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="oceania">
+      <span>🌏</span>
+      <strong data-i18n="oceania">Oceania</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="tela-jogo" id="tela-jogo">
+
+  <div class="jogo-topo">
+
+    <button class="voltar" id="btn-sair-jogo" data-i18n="exit">
+      ← Sair
+    </button>
+
+    <div class="placar">
+      <span id="progresso">1 / 4</span>
+      <strong id="pontos">0 pontos</strong>
+    </div>
+
+  </div>
+
+  <div class="pergunta">
+
+    <p data-i18n="question">
+      De qual país é esta bandeira?
+    </p>
+
+    <div class="bandeira">
+      <img
+        id="bandeira-atual"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <div class="alternativas" id="alternativas"></div>
+
+  </div>
+
+</section>
+
+
+  <section class="tela-resultado" id="tela-resultado">
+
+  <div class="resultado-card">
+
+    <div class="resultado-icone" id="resultado-icone">🏆</div>
+
+    <h1 data-i18n="gameCompleted">
+      Partida concluída!
+    </h1>
+
+    <p class="resultado-mensagem" id="resultado-mensagem">
+      Excelente resultado!
+    </p>
+
+    <div class="resultado-numero">
+      <strong id="resultado-pontos">0</strong>
+      <span id="resultado-total">/ 4</span>
+    </div>
+
+    <div class="resultado-percentual" id="resultado-percentual">
+      0% de acertos
+    </div>
+
+    <div
+      class="resultado-recorde"
+      id="resultado-recorde"
+      data-i18n="newRecord"
+    >
+      🏅 Novo recorde!
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-jogar-novamente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-outro-continente"
+        data-i18n="chooseAnotherContinent"
+      >
+        🌍 Escolher outro continente
+      </button>
+
+    </div>
+
+    <div class="share-panel">
+      <h2 data-i18n="shareResult">Compartilhar resultado</h2>
+      <p data-i18n="shareResultScoreDescription">
+        Gere uma imagem bonita com sua pontuação, sem dados pessoais.
+      </p>
+
+      <div class="share-actions">
+        <button
+          class="btn-principal"
+          id="btn-share-result"
+          data-i18n="share"
+        >
+          Compartilhar
+        </button>
+
+        <button
+          class="btn-secundario"
+          id="btn-download-share"
+          data-i18n="downloadImage"
+        >
+          Baixar imagem
+        </button>
+      </div>
+
+      <span
+        class="share-feedback"
+        id="share-feedback"
+      ></span>
+    </div>
+
+    <div class="challenge-result">
+      <h2 data-i18n="challengeFriendTitle">Desafie um amigo</h2>
+      <p data-i18n="challengeFriendDescription">
+        Gere um código para outra pessoa jogar exatamente a mesma
+        sequência de bandeiras.
+      </p>
+
+      <button
+        class="btn-secundario"
+        id="btn-generate-challenge"
+        data-i18n="generateCode"
+      >
+        Gerar código
+      </button>
+
+      <div
+        class="challenge-code-box"
+        id="challenge-code-box"
+      >
+        <strong id="challenge-code">FG-W20-82K7P</strong>
+        <button
+          class="btn-secundario"
+          id="btn-copy-challenge"
+          data-i18n="copy"
+        >
+          Copiar
+        </button>
+        <span
+          id="challenge-copy-feedback"
+          data-i18n="codeCopied"
+        >Código copiado</span>
+      </div>
+
+      <div class="challenge-metrics">
+        <div>
+          <span data-i18n="time">Tempo</span>
+          <strong id="challenge-time">00:00</strong>
+        </div>
+        <div>
+          <span data-i18n="correctAnswers">Acertos</span>
+          <strong id="challenge-correct">0</strong>
+        </div>
+        <div>
+          <span data-i18n="errors">Erros</span>
+          <strong id="challenge-errors">0</strong>
+        </div>
+        <div>
+          <span data-i18n="streak">Sequência</span>
+          <strong id="challenge-streak">0</strong>
+        </div>
+      </div>
+
+      <p
+        class="challenge-comparison"
+        id="challenge-comparison"
+      ></p>
+    </div>
+
+  </div>
+<!-- =========================
+     RODAPÉ
+========================= -->
+
+<footer class="app-footer">
+
+  <button
+    class="footer-link"
+    id="btn-support"
+    data-i18n="supportProject">
+    ❤️ Ajude a manter este projeto gratuito
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-about"
+    data-i18n="about">
+    ℹ️ Sobre
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-privacy"
+    data-i18n="privacyPolicy">
+    Política de Privacidade
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-profile"
+    data-i18n="profileLocal">
+    Perfil local
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-achievements"
+    data-i18n="achievements">
+    Conquistas
+  </button>
+
+  <div class="app-version">
+    <span data-i18n="version">Versão</span>
+    <strong>1.0.0</strong>
+  </div>
+
+</footer>
+
+</section>
+
+<!-- =========================
+     SUPPORT
+========================= -->
+
+<section
+  class="tela-support"
+  id="tela-support">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-support"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="supportTitle">
+      Apoie o Flag Game
+    </h1>
+
+    <div id="support-content">
+
+      <p class="support-message" data-i18n="supportMessage">
+        Obrigado por ajudar o Flag Game a continuar gratuito,
+        leve e disponível para todos.
+      </p>
+
+      <div class="support-qr">
+        <img
+          src="assets/images/pix-qrcode.png"
+          alt="QR Code PIX do Flag Game"
+        >
+      </div>
+
+      <div class="support-pix-key">
+        <span data-i18n="pixKeyLabel">Chave PIX</span>
+        <strong>accd4f55-98bb-4e2a-abd2-d3ab2cb7d892</strong>
+      </div>
+
+      <button
+        class="btn-principal"
+        id="btn-copiar-pix"
+        data-pix-key="accd4f55-98bb-4e2a-abd2-d3ab2cb7d892"
+        data-i18n="copyPixKey"
+      >
+        Copiar chave PIX
+      </button>
+
+      <div
+        class="pix-copy-message"
+        id="pix-copy-message"
+        aria-live="polite"
+        data-i18n="pixKeyCopied"
+      >
+        &#10004; PIX key copied!
+      </div>
 
       <a
-        class="button button--primary site-header__cta"
-        href="game/"
-        data-homepage-link="webGameUrl"
+        class="btn-secundario support-kofi"
+        href="https://ko-fi.com/flaggame"
+        target="_blank"
+        rel="noopener"
+        data-i18n="supportKofi"
       >
-        Jogar agora
+        Apoiar no Ko-fi
       </a>
+
+      <p class="support-contact">
+        <span data-i18n="contactLabel">Contato:</span>
+        <a href="mailto:flaggameapp@gmail.com">
+          flaggameapp@gmail.com
+        </a>
+      </p>
+
+      <p class="support-thanks" data-i18n="supportThanks">
+        Cada apoio ajuda a manter o projeto simples, rápido e feito
+        com carinho para quem quer aprender.
+      </p>
+
     </div>
-  </header>
 
-  <main id="conteudo" tabindex="-1">
-    <section class="homepage-section homepage-hero" id="inicio" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="hero-eyebrow">195 países. Várias formas de jogar.</p>
-          <h1 id="hero-title">Aprenda as bandeiras dos 195 países</h1>
-          <p class="hero-lede">
-            Jogue por continente, encare o mundo inteiro ou digite respostas no modo experiente.
-            O Flag Game acompanha sua evolução sem exigir conta.
-          </p>
-          <div class="hero-actions" aria-label="Ações principais">
-            <a class="button button--primary" href="game/" data-homepage-link="webGameUrl">Jogar agora</a>
-            <a class="button button--secondary" href="#modos">Ver modos</a>
-          </div>
-          <ul class="hero-facts" aria-label="Diferenciais principais">
-            <li>195 bandeiras de países</li>
-            <li>Progresso salvo localmente</li>
-            <li>Desafios por código</li>
-          </ul>
-        </div>
+  </div>
 
-        <div class="hero-mockup interface-mockup" role="img" aria-label="Mockup de uma pergunta do Flag Game com bandeira, alternativas e progresso da partida">
-          <div class="mockup-topline">
-            <span>Modo mundo</span>
-            <span>7 de 20</span>
-          </div>
-          <div class="flag-stage" aria-hidden="true">
-            <img src="assets/flags/jp.svg" alt="" width="900" height="600" fetchpriority="high">
-          </div>
-          <p class="mockup-question">De qual país é esta bandeira?</p>
-          <div class="mockup-options" aria-hidden="true">
-            <span>Japão</span>
-            <span>Coreia do Sul</span>
-            <span>Bangladesh</span>
-            <span>Indonésia</span>
-          </div>
-          <div class="mockup-progress" aria-hidden="true">
-            <span style="width: 35%"></span>
-          </div>
-        </div>
-      </div>
-    </section>
+</section>
 
-    <section class="homepage-section feature-section" id="diferenciais" aria-labelledby="features-title">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Mais que um quiz comum</p>
-          <h2 class="section-heading__title" id="features-title">Um jogo de bandeiras feito para evoluir</h2>
-          <p class="section-heading__text">
-            O desafio começa simples, mas cada modo abre uma forma diferente de aprender geografia.
-          </p>
-        </div>
+  
+<!-- =========================
+     ABOUT
+========================= -->
 
-        <ul class="feature-strip" aria-label="Diferenciais do Flag Game">
-          <li>
-            <strong>195 países</strong>
-            <span>Base principal completa para partidas curtas ou desafios longos.</span>
-          </li>
-          <li>
-            <strong>Modos por objetivo</strong>
-            <span>Pratique por continente, no mundo inteiro ou digitando respostas.</span>
-          </li>
-          <li>
-            <strong>Progresso local</strong>
-            <span>Veja partidas, acertos, média, sequência e continentes concluídos.</span>
-          </li>
-          <li>
-            <strong>Desafios por código</strong>
-            <span>Compartilhe a mesma sequência de bandeiras com outra pessoa.</span>
-          </li>
-        </ul>
-      </div>
-    </section>
+<section
+  class="tela-about"
+  id="tela-about">
 
-    <section class="homepage-section demo-section" id="demonstracao" aria-labelledby="demo-title">
-      <div class="container demo-layout">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Como a partida funciona</p>
-          <h2 class="section-heading__title" id="demo-title">A bandeira fica no centro da decisão</h2>
-          <p class="section-heading__text">
-            O jogo mostra progresso, pontuação e feedback imediato. Ao final, você pode rever o desempenho,
-            gerar imagem de resultado e continuar praticando.
-          </p>
-        </div>
+  <div class="card">
 
-        <div class="gameplay-panel">
-          <div class="question-card interface-mockup" aria-label="Exemplo visual de pergunta com alternativas">
-            <div class="mockup-topline">
-              <span>Pergunta</span>
-              <span>Pontuação 7/10</span>
-            </div>
-            <div class="flag-stage flag-stage--wide" aria-hidden="true">
-              <img src="assets/flags/br.svg" alt="" width="720" height="504" loading="lazy" decoding="async">
-            </div>
-            <p class="mockup-question">Você reconhece esta bandeira?</p>
-            <div class="answer-list" aria-hidden="true">
-              <span class="answer-list__item answer-list__item--correct">Brasil</span>
-              <span class="answer-list__item">Colômbia</span>
-              <span class="answer-list__item">Argentina</span>
-            </div>
-          </div>
+    <button
+      class="voltar"
+      id="btn-fechar-about"
+      data-i18n="back">
+      ← Voltar
+    </button>
 
-          <div class="result-panel" aria-label="Exemplo visual de resultado">
-            <span class="badge">Resultado</span>
-            <strong>Imagem de resultado</strong>
-            <p>Compartilhe sua pontuação sem expor dados pessoais.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <h1 data-i18n="about">
+      Sobre
+    </h1>
 
-    <section class="homepage-section modes-section" id="modos" aria-labelledby="modes-title">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Formas de jogar</p>
-          <h2 class="section-heading__title" id="modes-title">Três caminhos para explorar o mundo</h2>
-          <p class="section-heading__text">
-            Comece por regiões conhecidas, teste uma rodada global ou avance para respostas digitadas.
-          </p>
-        </div>
+    <div id="about-content">
 
-        <div class="mode-grid">
-          <article class="mode-card card">
-            <span class="mode-card__tag">Alternativas</span>
-            <h3>Por continente</h3>
-            <p>Escolha América do Sul, América do Norte e Central, Europa, África, Ásia ou Oceania.</p>
-          </article>
-          <article class="mode-card card">
-            <span class="mode-card__tag">10, 20, 50 ou 195</span>
-            <h3>Mundo inteiro</h3>
-            <p>Jogue partidas globais em diferentes tamanhos para medir seu conhecimento geral.</p>
-          </article>
-          <article class="mode-card card">
-            <span class="mode-card__tag">Digite o país</span>
-            <h3>Modo experiente</h3>
-            <p>Enfrente as bandeiras sem alternativas e escreva o nome dos países contra o tempo.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+      <p class="about-intro" data-i18n="aboutIntro">
+        O Flag Game foi criado para ajudar pessoas a aprenderem as
+        bandeiras dos 195 países e fortalecerem seus conhecimentos
+        de geografia de forma simples e divertida.
+      </p>
 
-    <section class="homepage-section progress-section" id="progresso" aria-labelledby="progress-title">
-      <div class="container progress-layout">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Evolução local</p>
-          <h2 class="section-heading__title" id="progress-title">Cada partida deixa um rastro</h2>
-          <p class="section-heading__text">
-            O perfil local registra histórico e estatísticas neste dispositivo, sem cadastro obrigatório.
-          </p>
-        </div>
+      <div class="about-list">
 
-        <div class="progress-panel" aria-label="Resumo dos dados de progresso local acompanhados pelo jogo">
-          <ul class="metric-list">
-            <li><span>Partidas jogadas</span><strong>histórico local</strong></li>
-            <li><span>Total de acertos</span><strong>por resposta</strong></li>
-            <li><span>Melhor sequência</span><strong>por partida</strong></li>
-            <li><span>Modo favorito</span><strong>por uso</strong></li>
-          </ul>
-          <div class="continent-row" aria-label="Continentes acompanhados no perfil">
-            <span>América</span>
-            <span>Europa</span>
-            <span>África</span>
-            <span>Ásia</span>
-            <span>Oceania</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="homepage-section achievements-section" id="conquistas" aria-labelledby="achievements-title">
-      <div class="container achievements-layout">
         <div>
-          <p class="section-heading__eyebrow">Metas</p>
-          <h2 class="section-heading__title" id="achievements-title">Conquistas dão próximos objetivos</h2>
+          <strong data-i18n="freeTitle">Gratuito</strong>
+          <span data-i18n="freeDescription">O aplicativo é gratuito para todos.</span>
         </div>
 
-        <ul class="achievement-list" aria-label="Exemplos de conquistas do jogo">
-          <li>
-            <strong>Primeira vitória</strong>
-            <span>Conclua sua primeira partida.</span>
-          </li>
-          <li>
-            <strong>100 acertos</strong>
-            <span>Some respostas corretas ao longo das partidas.</span>
-          </li>
-          <li>
-            <strong>Todos os continentes</strong>
-            <span>Complete partidas em cada região disponível.</span>
-          </li>
-          <li>
-            <strong>195 bandeiras</strong>
-            <span>Encare um desafio com a base completa.</span>
-          </li>
-        </ul>
+        <div>
+          <strong data-i18n="noAdsTitle">Sem anúncios</strong>
+          <span data-i18n="noAdsDescription">A experiência foi pensada sem distrações.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="independentTitle">Projeto independente</strong>
+          <span data-i18n="independentDescription">Feito com foco em simplicidade, aprendizado e manutenção.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="geographyLearningTitle">Aprendizado de geografia</strong>
+          <span data-i18n="geographyLearningDescription">Um incentivo para reconhecer países, continentes e culturas.</span>
+        </div>
+
       </div>
-    </section>
 
-    <section class="homepage-section challenge-section" id="desafios" aria-labelledby="challenge-title">
-      <div class="container challenge-layout">
-        <div class="challenge-copy">
-          <p class="section-heading__eyebrow">Compartilhamento</p>
-          <h2 class="section-heading__title" id="challenge-title">Desafie alguém com a mesma sequência</h2>
-          <p class="section-heading__text">
-            Depois de uma partida, o jogo pode gerar um código para outra pessoa jogar o mesmo conjunto de bandeiras.
-            Também há geração de imagem de resultado.
-          </p>
+      <div class="about-meta">
+        <div>
+          <span data-i18n="appVersion">Versão do aplicativo</span>
+          <strong>1.0.0</strong>
         </div>
 
-        <div class="challenge-code interface-mockup">
-          <span>Código de exemplo</span>
-          <code>FG-W20-82K7P</code>
-          <p>Modo, quantidade e sequência preservados. Resultados e comparações são locais nesta versão.</p>
+        <div>
+          <span data-i18n="credits">Créditos</span>
+          <strong>Flag Game</strong>
         </div>
       </div>
-    </section>
 
-    <section class="homepage-section languages-section" id="idiomas" aria-labelledby="languages-title">
-      <div class="container languages-layout">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Idiomas</p>
-          <h2 class="section-heading__title" id="languages-title">Feito para jogadores de muitos lugares</h2>
-          <p class="section-heading__text">
-            O Flag Game já oferece suporte a 20 idiomas, com escolha persistida localmente.
-          </p>
-        </div>
+    </div>
 
-        <ul class="language-list" aria-label="Idiomas suportados">
-          <li>Português brasileiro</li>
-          <li>English</li>
-          <li>Español</li>
-          <li>Français</li>
-          <li>Deutsch</li>
-          <li>Italiano</li>
-          <li>Nederlands</li>
-          <li>Polski</li>
-          <li>Русский</li>
-          <li>Українська</li>
-          <li>Türkçe</li>
-          <li>العربية</li>
-          <li>हिन्दी</li>
-          <li>বাংলা</li>
-          <li>简体中文</li>
-          <li>日本語</li>
-          <li>한국어</li>
-          <li>Bahasa Indonesia</li>
-          <li>Tiếng Việt</li>
-          <li>ไทย</li>
-        </ul>
+  </div>
+
+</section>
+
+<!-- =========================
+     PROFILE
+========================= -->
+
+<section
+  class="tela-profile"
+  id="tela-profile">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-profile"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="profileLocal">
+      Perfil local
+    </h1>
+
+    <div id="profile-content">
+
+      <p class="profile-intro" data-i18n="profileIntro">
+        Seu progresso fica salvo apenas neste dispositivo.
+      </p>
+
+      <div class="ranking-identity">
+        <strong data-i18n="rankingIdentityTitle">Identidade para ranking futuro</strong>
+
+        <label>
+          Player ID
+          <input
+            type="text"
+            id="ranking-player-id"
+            readonly
+          >
+        </label>
+
+        <label>
+          <span data-i18n="nickname">Nickname</span>
+          <input
+            type="text"
+            id="ranking-nickname"
+            maxlength="24"
+            placeholder="Seu apelido"
+            autocomplete="off"
+          >
+        </label>
+
+        <label>
+          <span data-i18n="country">País</span>
+          <input
+            type="text"
+            id="ranking-country"
+            maxlength="2"
+            placeholder="BR"
+            autocomplete="off"
+          >
+        </label>
+
+        <button
+          class="btn-secundario"
+          id="btn-save-ranking-player"
+          data-i18n="saveLocalIdentity"
+        >
+          Salvar identidade local
+        </button>
+
+        <span id="ranking-player-feedback"></span>
       </div>
-    </section>
 
-    <section class="homepage-section platforms-section" id="plataformas" aria-labelledby="platforms-title">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Plataformas</p>
-          <h2 class="section-heading__title" id="platforms-title">Comece pelo navegador</h2>
-          <p class="section-heading__text">
-            A Web é a entrada principal. Google Play e Chrome Web Store só aparecem com links oficiais configurados.
-          </p>
+      <div class="profile-grid">
+
+        <div>
+          <span data-i18n="gamesPlayed">Partidas jogadas</span>
+          <strong id="profile-games">0</strong>
         </div>
 
-        <div class="platform-grid">
-          <article class="platform-card card">
-            <span class="platform-card__icon" aria-hidden="true">Web</span>
-            <h3>Jogar no navegador</h3>
-            <p>Abra o Flag Game direto na Web e comece sem criar conta.</p>
-            <a
-              class="button button--primary"
-              href="https://flaggameapp.github.io/flaggameapp/"
-              data-homepage-link="publicWebGameUrl"
-            >
-              Jogar agora
-            </a>
-          </article>
+        <div>
+          <span data-i18n="totalCorrect">Total de acertos</span>
+          <strong id="profile-correct">0</strong>
+        </div>
 
-          <article class="platform-card card" hidden data-platform-card="googlePlayUrl">
-            <span class="platform-card__icon" aria-hidden="true">Android</span>
-            <h3>Baixar na Google Play</h3>
-            <p>Use o Flag Game no Android pelo link oficial da loja.</p>
-            <a
-              class="button button--platform"
-              hidden
-              data-homepage-link="googlePlayUrl"
-              target="_blank"
-              rel="noopener"
-            >
-              Baixar na Google Play
-            </a>
-          </article>
+        <div>
+          <span data-i18n="averagePercent">Percentual médio</span>
+          <strong id="profile-average">0%</strong>
+        </div>
 
-          <article class="platform-card card" hidden data-platform-card="chromeWebStoreUrl">
-            <span class="platform-card__icon" aria-hidden="true">Chrome</span>
-            <h3>Instalar pela Chrome Web Store</h3>
-            <p>Abra o jogo como extensão do Chrome pelo link oficial da loja.</p>
-            <a
-              class="button button--platform"
-              hidden
-              data-homepage-link="chromeWebStoreUrl"
-              target="_blank"
-              rel="noopener"
-            >
-              Instalar no Chrome
-            </a>
-          </article>
+        <div>
+          <span data-i18n="bestStreak">Melhor sequência</span>
+          <strong id="profile-streak">0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="averageTime">Tempo médio</span>
+          <strong id="profile-time">00:00</strong>
+        </div>
+
+        <div>
+          <span data-i18n="favoriteMode">Modo favorito</span>
+          <strong id="profile-mode">-</strong>
+        </div>
+
+      </div>
+
+      <div class="profile-continents">
+        <span data-i18n="continentsCompleted">Continentes concluídos</span>
+        <strong id="profile-continents">0 / 6</strong>
+      </div>
+
+      <p class="profile-note" data-i18n="profileNote">
+        Arquitetura preparada para sincronização futura, sem login nesta versão.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+<!-- =========================
+     ACHIEVEMENTS
+========================= -->
+
+<section
+  class="tela-achievements"
+  id="tela-achievements">
+
+  <div class="card achievements-card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-achievements"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="achievements">
+      Conquistas
+    </h1>
+
+    <div id="achievements-content">
+
+      <div class="achievements-summary">
+        <div>
+          <span data-i18n="achievementsUnlocked">Desbloqueadas</span>
+          <strong id="achievements-count">0 / 0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="achievementPoints">Pontos</span>
+          <strong id="achievements-points">0</strong>
         </div>
       </div>
-    </section>
 
-    <section class="homepage-section faq-section" id="faq" aria-labelledby="faq-title">
-      <div class="container faq-layout">
-        <div class="section-heading">
-          <p class="section-heading__eyebrow">Perguntas frequentes</p>
-          <h2 class="section-heading__title" id="faq-title">O essencial antes de começar</h2>
+      <div
+        class="achievements-list"
+        id="achievements-list"
+      ></div>
+
+      <p class="achievements-note" data-i18n="achievementsNote">
+        Os dados ficam salvos localmente e já estão organizados para
+        um futuro ranking online.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     PRIVACY POLICY
+========================= -->
+
+<section
+  class="tela-privacy"
+  id="tela-privacy">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-privacy"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="privacyPolicy">
+      Política de Privacidade
+    </h1>
+
+    <div id="privacy-content">
+
+      <p class="privacy-intro" data-i18n="privacyIntro">
+        Esta política descreve como o Flag Game trata informações
+        no aplicativo.
+      </p>
+
+      <div class="privacy-list">
+
+        <div>
+          <strong data-i18n="privacyNoPersonalDataTitle">Nenhum dado pessoal é coletado</strong>
+          <span data-i18n="privacyNoPersonalDataDescription">O Flag Game não solicita, armazena ou envia dados pessoais.</span>
         </div>
 
-        <div class="faq-list">
-          <details>
-            <summary>Quantas bandeiras o Flag Game tem?</summary>
-            <p>A base principal do jogo inclui 195 países.</p>
-          </details>
-          <details>
-            <summary>Preciso criar conta para jogar?</summary>
-            <p>Não. A versão atual funciona sem cadastro, login ou conta de usuário.</p>
-          </details>
-          <details>
-            <summary>O progresso fica salvo onde?</summary>
-            <p>Partidas, acertos, média, sequência, modo favorito e continentes concluídos ficam salvos localmente neste dispositivo.</p>
-          </details>
-          <details>
-            <summary>Funciona offline?</summary>
-            <p>As funções principais foram pensadas para funcionar localmente quando os arquivos do jogo estão disponíveis no dispositivo ou ambiente em que ele foi aberto.</p>
-          </details>
-          <details>
-            <summary>Quais modos existem?</summary>
-            <p>Você pode jogar por continente, no mundo inteiro com 10, 20, 50 ou 195 bandeiras, ou no modo experiente digitando o nome dos países.</p>
-          </details>
-          <details>
-            <summary>Existe ranking online?</summary>
-            <p>Não como recurso público ativo nesta versão. O jogo atual permanece local-first.</p>
-          </details>
+        <div>
+          <strong data-i18n="privacyNoLoginTitle">Não existe login</strong>
+          <span data-i18n="privacyNoLoginDescription">O aplicativo não possui conta de usuário, cadastro ou autenticação.</span>
         </div>
-      </div>
-    </section>
 
-    <section class="homepage-section homepage-section--final final-cta" id="comecar" aria-labelledby="final-title">
-      <div class="container final-cta__inner">
-        <p class="section-heading__eyebrow">Comece agora</p>
-        <h2 class="section-heading__title" id="final-title">Quantas das 195 você reconhece hoje?</h2>
-        <p>Abra uma partida e veja seu progresso crescer a cada rodada.</p>
-        <a class="button button--primary" href="game/" data-homepage-link="webGameUrl">Jogar Flag Game agora</a>
+        <div>
+          <strong data-i18n="privacyNoTrackingTitle">Não existe rastreamento</strong>
+          <span data-i18n="privacyNoTrackingDescription">Não usamos cookies, analytics, identificadores de publicidade ou rastreadores.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyLocalRecordsTitle">Recordes apenas locais</strong>
+          <span data-i18n="privacyLocalRecordsDescription">Os recordes ficam salvos somente no dispositivo, usando armazenamento local.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyOfflineTitle">Funciona offline</strong>
+          <span data-i18n="privacyOfflineDescription">As principais funcionalidades do aplicativo continuam disponíveis sem internet.</span>
+        </div>
+
       </div>
-    </section>
+
+      <p class="privacy-contact">
+        <span data-i18n="privacyContact">Dúvidas sobre privacidade:</span>
+        <a href="mailto:flaggameapp@gmail.com">
+          flaggameapp@gmail.com
+        </a>
+      </p>
+
+      <p class="privacy-updated" data-i18n="privacyUpdated">
+        Última atualização: 11 de julho de 2026.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <div>
-        <p class="site-footer__brand">Flag Game</p>
-        <p class="site-footer__text">Um jogo educativo para aprender as bandeiras dos 195 países.</p>
-      </div>
-      <nav class="site-footer__nav" aria-label="Links do rodapé">
-        <a href="game/" data-homepage-link="webGameUrl">Jogar</a>
-        <a href="#modos">Modos</a>
-        <a href="#plataformas">Plataformas</a>
-        <a href="#faq">FAQ</a>
-        <a hidden data-homepage-link="githubUrl" data-optional-link target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </footer>
+<script src="js/countries.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/challenges.js"></script>
+<script src="js/ranking.js"></script>
+<script src="js/firebase-auth.js"></script>
+<script src="js/sync.js"></script>
+<script src="js/app.js"></script>
 
-  <script src="homepage/js/homepage.js" defer></script>
 </body>
 </html>
