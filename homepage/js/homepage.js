@@ -10,7 +10,7 @@
 
   const defaultHomepageLinks = {
     webGameUrl: "game/",
-    publicWebGameUrl: "https://flaggameapp.github.io/flaggameapp/",
+    publicWebGameUrl: "game/",
     googlePlayUrl: "",
     chromeWebStoreUrl: "",
     githubUrl: ""
