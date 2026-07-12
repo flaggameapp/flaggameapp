@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/images/social-preview.png" alt="Flag Game">
+  <img src="https://flaggameapp.github.io/flaggameapp/homepage/assets/logo-homepage.png" alt="Flag Game">
 </p>
 
 # 🌍 Flag Game
