@@ -1,0 +1,1074 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+
+  <title>Flag Game</title>
+
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+  <meta property="og:title" content="Flag Game">
+  <meta property="og:image" content="assets/images/logo.png">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="app-loading">
+
+  <div class="app-loader" id="app-loader" aria-live="polite">
+    <div></div>
+    <span data-i18n="loading">Carregando...</span>
+  </div>
+
+  <div
+    class="achievement-toast"
+    id="achievement-toast"
+    aria-live="polite"
+  ></div>
+
+  <main class="app">
+
+    <header class="topo">
+      <div class="logo">
+        <a
+          href="#home"
+          class="logo-home-link"
+          id="logo-home-link"
+          aria-label="Flag Game - Home"
+        >
+          <img
+            src="assets/images/logo.png"
+            alt="Flag Game"
+            class="brand-logo"
+          >
+        </a>
+      </div>
+
+      <div class="topo-controles">
+
+      <button
+        class="sound-toggle"
+        id="btn-som"
+        type="button"
+        aria-label="Ativar sons"
+        aria-pressed="false"
+      >
+        🔇
+      </button>
+
+      <select
+        id="idioma"
+        aria-label="Selecionar idioma"
+        data-i18n-aria-label="languageSelectLabel">
+  <option value="pt-BR">🇧🇷 Português</option>
+  <option value="en">🇺🇸 English</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="nl">🇳🇱 Nederlands</option>
+  <option value="pl">🇵🇱 Polski</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="uk">🇺🇦 Українська</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="ar">🇸🇦 العربية</option>
+  <option value="hi">🇮🇳 हिन्दी</option>
+  <option value="bn">🇧🇩 বাংলা</option>
+  <option value="zh-CN">🇨🇳 中文</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="ko">🇰🇷 한국어</option>
+  <option value="id">🇮🇩 Bahasa Indonesia</option>
+  <option value="vi">🇻🇳 Tiếng Việt</option>
+  <option value="th">🇹🇭 ไทย</option>
+</select>
+
+      </div>
+    </header>
+
+    <section class="inicio">
+      <h1 data-i18n="homeTitle">Aprenda as bandeiras do mundo</h1>
+
+      <p data-i18n="homeSubtitle">
+  Teste seus conhecimentos sobre os 195 países.
+</p>
+
+      <div class="modos">
+
+  <button class="modo" id="btn-continentes">
+    <span class="icone">🌎</span>
+    <strong data-i18n="modeContinent">Por continente</strong>
+    <small data-i18n="modeContinentDescription">
+      Aprenda com alternativas
+    </small>
+  </button>
+
+  <button class="modo" id="btn-mundo">
+    <span class="icone">🌍</span>
+    <strong data-i18n="modeWorld">Mundo inteiro</strong>
+    <small data-i18n="modeWorldDescription">
+      Desafie seus conhecimentos
+    </small>
+  </button>
+
+  <button class="modo" id="btn-experiente">
+    <span class="icone">🏆</span>
+    <strong data-i18n="modeExpert">Modo Experiente</strong>
+    <small data-i18n="modeExpertDescription">
+      Digite os países contra o tempo
+    </small>
+  </button>
+
+</div>
+
+      <div class="challenge-entry">
+        <strong data-i18n="challengeFriends">Desafio entre amigos</strong>
+        <div>
+          <input
+            type="text"
+            id="challenge-code-input"
+            placeholder="FG-W20-82K7P"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Código do desafio"
+            data-i18n-aria-label="challengeCodeLabel"
+          >
+          <button
+            class="btn-secundario"
+            id="btn-play-challenge"
+            data-i18n="playChallenge"
+          >
+            Jogar desafio
+          </button>
+        </div>
+        <span id="challenge-entry-feedback"></span>
+      </div>
+    </section>
+<section class="tela-mundo" id="tela-mundo">
+
+  <button class="voltar" id="btn-voltar-mundo" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="worldGameTitle">
+    Mundo inteiro
+  </h1>
+
+  <p data-i18n="worldGameSubtitle">
+    Quantas bandeiras você quer tentar acertar?
+  </p>
+
+  <div class="opcoes-quantidade">
+
+    <button class="quantidade" data-quantidade="10">
+      <strong>10</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="20">
+      <strong>20</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="50">
+      <strong>50</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+    <button class="quantidade" data-quantidade="195">
+      <strong>195</strong>
+      <span data-i18n="flags">bandeiras</span>
+    </button>
+
+  </div>
+
+</section>
+
+<section class="tela-experiente" id="tela-experiente">
+
+  <div class="experiente-topo">
+
+    <button
+      class="voltar"
+      id="btn-sair-experiente"
+      data-i18n="exit"
+    >
+      ← Sair
+    </button>
+
+    <div class="experiente-status">
+
+      <div class="experiente-progresso">
+        <span id="experiente-progresso">1 / 195</span>
+      </div>
+
+      <div class="experiente-cronometro">
+        ⏱️ <strong id="experiente-tempo">00:00</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="experiente-conteudo">
+
+    <div class="experiente-marca">
+      🏆 <span data-i18n="expertModeTitle">Modo Experiente</span>
+    </div>
+
+    <div class="experiente-bandeira">
+      <img
+        id="experiente-bandeira"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <p class="experiente-pergunta" data-i18n="expertQuestion">
+      Qual é este país?
+    </p>
+
+    <form id="form-experiente" class="experiente-form">
+
+      <input
+        type="text"
+        id="experiente-resposta"
+        data-i18n-placeholder="expertPlaceholder"
+        placeholder="Digite o nome do país..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button type="submit" class="btn-principal" data-i18n="answer">
+        Responder
+      </button>
+
+    </form>
+
+    <div
+      class="experiente-feedback"
+      id="experiente-feedback"
+    ></div>
+
+    <button
+      class="btn-pular"
+      id="btn-pular"
+      data-i18n="skip"
+    >
+      Não sei / Pular
+    </button>
+
+    <div class="experiente-estatisticas">
+
+      <div>
+        <strong id="experiente-acertos">0</strong>
+        <span data-i18n="correctAnswers">Acertos</span>
+      </div>
+
+      <div>
+        <strong id="experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="experiente-sequencia">0</strong>
+        <span data-i18n="streak">Sequência</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  class="tela-resultado-experiente"
+  id="tela-resultado-experiente"
+>
+
+  <div class="resultado-experiente-card">
+
+    <div class="resultado-experiente-icone">🏆</div>
+
+    <h1 data-i18n="expertCompleted">
+      Desafio concluído!
+    </h1>
+
+    <p data-i18n="expertCompletedSubtitle">
+      Você enfrentou as 195 bandeiras do mundo.
+    </p>
+
+    <div class="resultado-experiente-destaque">
+      <strong id="resultado-experiente-acertos">0</strong>
+      <span>/ 195</span>
+    </div>
+
+    <div class="resultado-experiente-grid">
+
+      <div>
+        <strong id="resultado-experiente-puladas">0</strong>
+        <span data-i18n="skipped">Puladas</span>
+      </div>
+
+      <div>
+        <strong id="resultado-experiente-tempo">00:00</strong>
+        <span data-i18n="totalTime">Tempo total</span>
+      </div>
+
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-reiniciar-experiente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-menu-experiente"
+        data-i18n="backToMenu"
+      >
+        🏠 Voltar ao menu
+      </button>
+
+    </div>
+
+    <div class="share-panel">
+      <h2 data-i18n="shareResult">Compartilhar resultado</h2>
+      <p data-i18n="shareResultPerformanceDescription">
+        Gere uma imagem bonita com seu desempenho, sem dados pessoais.
+      </p>
+
+      <div class="share-actions">
+        <button
+          class="btn-principal"
+          id="btn-share-experiente"
+          data-i18n="share"
+        >
+          Compartilhar
+        </button>
+
+        <button
+          class="btn-secundario"
+          id="btn-download-share-experiente"
+          data-i18n="downloadImage"
+        >
+          Baixar imagem
+        </button>
+      </div>
+
+      <span
+        class="share-feedback"
+        id="share-feedback-experiente"
+      ></span>
+    </div>
+
+  </div>
+
+</section>
+
+    <section class="tela-continentes" id="tela-continentes">
+
+  <button class="voltar" id="btn-voltar" data-i18n="back">
+    ← Voltar
+  </button>
+
+  <h1 data-i18n="chooseContinent">Escolha um continente</h1>
+
+  <p data-i18n="chooseContinentSubtitle">
+    Qual parte do mundo você quer explorar?
+  </p>
+
+  <div class="continentes">
+
+    <button class="continente" data-continente="south-america">
+      <span>🌎</span>
+      <strong data-i18n="southAmerica">América do Sul</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="north-america">
+      <span>🌎</span>
+      <strong data-i18n="northAmerica">América do Norte e Central</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="europe">
+      <span>🌍</span>
+      <strong data-i18n="europe">Europa</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="africa">
+      <span>🌍</span>
+      <strong data-i18n="africa">África</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="asia">
+      <span>🌏</span>
+      <strong data-i18n="asia">Ásia</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+    <button class="continente" data-continente="oceania">
+      <span>🌏</span>
+      <strong data-i18n="oceania">Oceania</strong>
+      <small class="contador-paises"></small>
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="tela-jogo" id="tela-jogo">
+
+  <div class="jogo-topo">
+
+    <button class="voltar" id="btn-sair-jogo" data-i18n="exit">
+      ← Sair
+    </button>
+
+    <div class="placar">
+      <span id="progresso">1 / 4</span>
+      <strong id="pontos">0 pontos</strong>
+    </div>
+
+  </div>
+
+  <div class="pergunta">
+
+    <p data-i18n="question">
+      De qual país é esta bandeira?
+    </p>
+
+    <div class="bandeira">
+      <img
+        id="bandeira-atual"
+        src=""
+        alt="Bandeira do país"
+      >
+    </div>
+
+    <div class="alternativas" id="alternativas"></div>
+
+  </div>
+
+</section>
+
+
+  <section class="tela-resultado" id="tela-resultado">
+
+  <div class="resultado-card">
+
+    <div class="resultado-icone" id="resultado-icone">🏆</div>
+
+    <h1 data-i18n="gameCompleted">
+      Partida concluída!
+    </h1>
+
+    <p class="resultado-mensagem" id="resultado-mensagem">
+      Excelente resultado!
+    </p>
+
+    <div class="resultado-numero">
+      <strong id="resultado-pontos">0</strong>
+      <span id="resultado-total">/ 4</span>
+    </div>
+
+    <div class="resultado-percentual" id="resultado-percentual">
+      0% de acertos
+    </div>
+
+    <div
+      class="resultado-recorde"
+      id="resultado-recorde"
+      data-i18n="newRecord"
+    >
+      🏅 Novo recorde!
+    </div>
+
+    <div class="resultado-botoes">
+
+      <button
+        class="btn-principal"
+        id="btn-jogar-novamente"
+        data-i18n="playAgain"
+      >
+        🔄 Jogar novamente
+      </button>
+
+      <button
+        class="btn-secundario"
+        id="btn-outro-continente"
+        data-i18n="chooseAnotherContinent"
+      >
+        🌍 Escolher outro continente
+      </button>
+
+    </div>
+
+    <div class="share-panel">
+      <h2 data-i18n="shareResult">Compartilhar resultado</h2>
+      <p data-i18n="shareResultScoreDescription">
+        Gere uma imagem bonita com sua pontuação, sem dados pessoais.
+      </p>
+
+      <div class="share-actions">
+        <button
+          class="btn-principal"
+          id="btn-share-result"
+          data-i18n="share"
+        >
+          Compartilhar
+        </button>
+
+        <button
+          class="btn-secundario"
+          id="btn-download-share"
+          data-i18n="downloadImage"
+        >
+          Baixar imagem
+        </button>
+      </div>
+
+      <span
+        class="share-feedback"
+        id="share-feedback"
+      ></span>
+    </div>
+
+    <div class="challenge-result">
+      <h2 data-i18n="challengeFriendTitle">Desafie um amigo</h2>
+      <p data-i18n="challengeFriendDescription">
+        Gere um código para outra pessoa jogar exatamente a mesma
+        sequência de bandeiras.
+      </p>
+
+      <button
+        class="btn-secundario"
+        id="btn-generate-challenge"
+        data-i18n="generateCode"
+      >
+        Gerar código
+      </button>
+
+      <div
+        class="challenge-code-box"
+        id="challenge-code-box"
+      >
+        <strong id="challenge-code">FG-W20-82K7P</strong>
+        <button
+          class="btn-secundario"
+          id="btn-copy-challenge"
+          data-i18n="copy"
+        >
+          Copiar
+        </button>
+        <span
+          id="challenge-copy-feedback"
+          data-i18n="codeCopied"
+        >Código copiado</span>
+      </div>
+
+      <div class="challenge-metrics">
+        <div>
+          <span data-i18n="time">Tempo</span>
+          <strong id="challenge-time">00:00</strong>
+        </div>
+        <div>
+          <span data-i18n="correctAnswers">Acertos</span>
+          <strong id="challenge-correct">0</strong>
+        </div>
+        <div>
+          <span data-i18n="errors">Erros</span>
+          <strong id="challenge-errors">0</strong>
+        </div>
+        <div>
+          <span data-i18n="streak">Sequência</span>
+          <strong id="challenge-streak">0</strong>
+        </div>
+      </div>
+
+      <p
+        class="challenge-comparison"
+        id="challenge-comparison"
+      ></p>
+    </div>
+
+  </div>
+<!-- =========================
+     RODAPÉ
+========================= -->
+
+<footer class="app-footer">
+
+  <button
+    class="footer-link"
+    id="btn-support"
+    data-i18n="supportProject">
+    ❤️ Ajude a manter este projeto gratuito
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-about"
+    data-i18n="about">
+    ℹ️ Sobre
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-privacy"
+    data-i18n="privacyPolicy">
+    Política de Privacidade
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-profile"
+    data-i18n="profileLocal">
+    Perfil local
+  </button>
+
+  <button
+    class="footer-link"
+    id="btn-achievements"
+    data-i18n="achievements">
+    Conquistas
+  </button>
+
+  <div class="app-version">
+    <span data-i18n="version">Versão</span>
+    <strong>1.0.0</strong>
+  </div>
+
+</footer>
+
+</section>
+
+<!-- =========================
+     SUPPORT
+========================= -->
+
+<section
+  class="tela-support"
+  id="tela-support">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-support"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="supportTitle">
+      Apoie o Flag Game
+    </h1>
+
+    <div id="support-content">
+
+      <p class="support-message" data-i18n="supportMessage">
+        Obrigado por ajudar o Flag Game a continuar gratuito,
+        leve e disponível para todos.
+      </p>
+
+      <div class="support-qr">
+        <img
+          src="assets/images/pix-qrcode.png"
+          alt="QR Code PIX do Flag Game"
+        >
+      </div>
+
+      <div class="support-pix-key">
+        <span data-i18n="pixKeyLabel">Chave PIX</span>
+        <strong>accd4f55-98bb-4e2a-abd2-d3ab2cb7d892</strong>
+      </div>
+
+      <button
+        class="btn-principal"
+        id="btn-copiar-pix"
+        data-pix-key="accd4f55-98bb-4e2a-abd2-d3ab2cb7d892"
+        data-i18n="copyPixKey"
+      >
+        Copiar chave PIX
+      </button>
+
+      <div
+        class="pix-copy-message"
+        id="pix-copy-message"
+        aria-live="polite"
+        data-i18n="pixKeyCopied"
+      >
+        &#10004; PIX key copied!
+      </div>
+
+      <a
+        class="btn-secundario support-kofi"
+        href="https://ko-fi.com/flaggame"
+        target="_blank"
+        rel="noopener"
+        data-i18n="supportKofi"
+      >
+        Apoiar no Ko-fi
+      </a>
+
+      <p class="support-contact">
+        <span data-i18n="contactLabel">Contato:</span>
+        <a href="mailto:flaggameapp@gmail.com">
+          flaggameapp@gmail.com
+        </a>
+      </p>
+
+      <p class="support-thanks" data-i18n="supportThanks">
+        Cada apoio ajuda a manter o projeto simples, rápido e feito
+        com carinho para quem quer aprender.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+  
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+  class="tela-about"
+  id="tela-about">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-about"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="about">
+      Sobre
+    </h1>
+
+    <div id="about-content">
+
+      <p class="about-intro" data-i18n="aboutIntro">
+        O Flag Game foi criado para ajudar pessoas a aprenderem as
+        bandeiras dos 195 países e fortalecerem seus conhecimentos
+        de geografia de forma simples e divertida.
+      </p>
+
+      <div class="about-list">
+
+        <div>
+          <strong data-i18n="freeTitle">Gratuito</strong>
+          <span data-i18n="freeDescription">O aplicativo é gratuito para todos.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="noAdsTitle">Sem anúncios</strong>
+          <span data-i18n="noAdsDescription">A experiência foi pensada sem distrações.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="independentTitle">Projeto independente</strong>
+          <span data-i18n="independentDescription">Feito com foco em simplicidade, aprendizado e manutenção.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="geographyLearningTitle">Aprendizado de geografia</strong>
+          <span data-i18n="geographyLearningDescription">Um incentivo para reconhecer países, continentes e culturas.</span>
+        </div>
+
+      </div>
+
+      <div class="about-meta">
+        <div>
+          <span data-i18n="appVersion">Versão do aplicativo</span>
+          <strong>1.0.0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="credits">Créditos</span>
+          <strong>Flag Game</strong>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     PROFILE
+========================= -->
+
+<section
+  class="tela-profile"
+  id="tela-profile">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-profile"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="profileLocal">
+      Perfil local
+    </h1>
+
+    <div id="profile-content">
+
+      <p class="profile-intro" data-i18n="profileIntro">
+        Seu progresso fica salvo apenas neste dispositivo.
+      </p>
+
+      <div class="ranking-identity">
+        <strong data-i18n="rankingIdentityTitle">Identidade para ranking futuro</strong>
+
+        <label>
+          Player ID
+          <input
+            type="text"
+            id="ranking-player-id"
+            readonly
+          >
+        </label>
+
+        <label>
+          <span data-i18n="nickname">Nickname</span>
+          <input
+            type="text"
+            id="ranking-nickname"
+            maxlength="24"
+            placeholder="Seu apelido"
+            autocomplete="off"
+          >
+        </label>
+
+        <label>
+          <span data-i18n="country">País</span>
+          <input
+            type="text"
+            id="ranking-country"
+            maxlength="2"
+            placeholder="BR"
+            autocomplete="off"
+          >
+        </label>
+
+        <button
+          class="btn-secundario"
+          id="btn-save-ranking-player"
+          data-i18n="saveLocalIdentity"
+        >
+          Salvar identidade local
+        </button>
+
+        <span id="ranking-player-feedback"></span>
+      </div>
+
+      <div class="profile-grid">
+
+        <div>
+          <span data-i18n="gamesPlayed">Partidas jogadas</span>
+          <strong id="profile-games">0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="totalCorrect">Total de acertos</span>
+          <strong id="profile-correct">0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="averagePercent">Percentual médio</span>
+          <strong id="profile-average">0%</strong>
+        </div>
+
+        <div>
+          <span data-i18n="bestStreak">Melhor sequência</span>
+          <strong id="profile-streak">0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="averageTime">Tempo médio</span>
+          <strong id="profile-time">00:00</strong>
+        </div>
+
+        <div>
+          <span data-i18n="favoriteMode">Modo favorito</span>
+          <strong id="profile-mode">-</strong>
+        </div>
+
+      </div>
+
+      <div class="profile-continents">
+        <span data-i18n="continentsCompleted">Continentes concluídos</span>
+        <strong id="profile-continents">0 / 6</strong>
+      </div>
+
+      <p class="profile-note" data-i18n="profileNote">
+        Arquitetura preparada para sincronização futura, sem login nesta versão.
+      </p>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+<!-- =========================
+     ACHIEVEMENTS
+========================= -->
+
+<section
+  class="tela-achievements"
+  id="tela-achievements">
+
+  <div class="card achievements-card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-achievements"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="achievements">
+      Conquistas
+    </h1>
+
+    <div id="achievements-content">
+
+      <div class="achievements-summary">
+        <div>
+          <span data-i18n="achievementsUnlocked">Desbloqueadas</span>
+          <strong id="achievements-count">0 / 0</strong>
+        </div>
+
+        <div>
+          <span data-i18n="achievementPoints">Pontos</span>
+          <strong id="achievements-points">0</strong>
+        </div>
+      </div>
+
+      <div
+        class="achievements-list"
+        id="achievements-list"
+      ></div>
+
+      <p class="achievements-note" data-i18n="achievementsNote">
+        Os dados ficam salvos localmente e já estão organizados para
+        um futuro ranking online.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     PRIVACY POLICY
+========================= -->
+
+<section
+  class="tela-privacy"
+  id="tela-privacy">
+
+  <div class="card">
+
+    <button
+      class="voltar"
+      id="btn-fechar-privacy"
+      data-i18n="back">
+      ← Voltar
+    </button>
+
+    <h1 data-i18n="privacyPolicy">
+      Política de Privacidade
+    </h1>
+
+    <div id="privacy-content">
+
+      <p class="privacy-intro" data-i18n="privacyIntro">
+        Esta política descreve como o Flag Game trata informações
+        no aplicativo.
+      </p>
+
+      <div class="privacy-list">
+
+        <div>
+          <strong data-i18n="privacyNoPersonalDataTitle">Nenhum dado pessoal é coletado</strong>
+          <span data-i18n="privacyNoPersonalDataDescription">O Flag Game não solicita, armazena ou envia dados pessoais.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyNoLoginTitle">Não existe login</strong>
+          <span data-i18n="privacyNoLoginDescription">O aplicativo não possui conta de usuário, cadastro ou autenticação.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyNoTrackingTitle">Não existe rastreamento</strong>
+          <span data-i18n="privacyNoTrackingDescription">Não usamos cookies, analytics, identificadores de publicidade ou rastreadores.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyLocalRecordsTitle">Recordes apenas locais</strong>
+          <span data-i18n="privacyLocalRecordsDescription">Os recordes ficam salvos somente no dispositivo, usando armazenamento local.</span>
+        </div>
+
+        <div>
+          <strong data-i18n="privacyOfflineTitle">Funciona offline</strong>
+          <span data-i18n="privacyOfflineDescription">As principais funcionalidades do aplicativo continuam disponíveis sem internet.</span>
+        </div>
+
+      </div>
+
+      <p class="privacy-contact">
+        <span data-i18n="privacyContact">Dúvidas sobre privacidade:</span>
+        <a href="mailto:flaggameapp@gmail.com">
+          flaggameapp@gmail.com
+        </a>
+      </p>
+
+      <p class="privacy-updated" data-i18n="privacyUpdated">
+        Última atualização: 11 de julho de 2026.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+  </main>
+
+<script src="js/countries.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/challenges.js"></script>
+<script src="js/ranking.js"></script>
+<script src="js/firebase-auth.js"></script>
+<script src="js/sync.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
