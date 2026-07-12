@@ -37,6 +37,7 @@
           class="logo-home-link"
           id="logo-home-link"
           aria-label="Flag Game - Home"
+          data-i18n-aria-label="homeBrandAria"
         >
           <img
             src="assets/images/logo.png"
@@ -53,6 +54,7 @@
         id="btn-som"
         type="button"
         aria-label="Ativar sons"
+        data-i18n-aria-label="soundOnLabel"
         aria-pressed="false"
       >
         🔇
@@ -222,6 +224,7 @@
         id="experiente-bandeira"
         src=""
         alt="Bandeira do país"
+        data-i18n-alt="flagImageAlt"
       >
     </div>
 
@@ -438,7 +441,7 @@
 
     <div class="placar">
       <span id="progresso">1 / 4</span>
-      <strong id="pontos">0 pontos</strong>
+      <strong id="pontos">0</strong>
     </div>
 
   </div>
@@ -454,6 +457,7 @@
         id="bandeira-atual"
         src=""
         alt="Bandeira do país"
+        data-i18n-alt="flagImageAlt"
       >
     </div>
 
@@ -474,7 +478,11 @@
       Partida concluída!
     </h1>
 
-    <p class="resultado-mensagem" id="resultado-mensagem">
+    <p
+      class="resultado-mensagem"
+      id="resultado-mensagem"
+      data-i18n="excellent"
+    >
       Excelente resultado!
     </p>
 
@@ -484,7 +492,7 @@
     </div>
 
     <div class="resultado-percentual" id="resultado-percentual">
-      0% de acertos
+      0%
     </div>
 
     <div
@@ -686,6 +694,7 @@
         <img
           src="assets/images/pix-qrcode.png"
           alt="QR Code PIX do Flag Game"
+          data-i18n-alt="supportQrAlt"
         >
       </div>
 
@@ -843,7 +852,7 @@
         <strong data-i18n="rankingIdentityTitle">Identidade para ranking futuro</strong>
 
         <label>
-          Player ID
+          <span data-i18n="playerId">ID do jogador</span>
           <input
             type="text"
             id="ranking-player-id"
@@ -858,6 +867,7 @@
             id="ranking-nickname"
             maxlength="24"
             placeholder="Seu apelido"
+            data-i18n-placeholder="nicknamePlaceholder"
             autocomplete="off"
           >
         </label>
