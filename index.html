@@ -7,6 +7,18 @@
     document.documentElement.classList.replace("no-js", "js");
   </script>
 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V1Q5QZ9LW9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V1Q5QZ9LW9');
+</script>
+
+
   <title>Flag Game - Aprenda as bandeiras dos 195 países</title>
   <meta
     name="description"
@@ -102,6 +114,36 @@
           <li><a href="#faq" data-section-link>FAQ</a></li>
         </ul>
       </nav>
+
+      <div class="language-control">
+        <label class="visually-hidden" for="homepage-language">Idioma da homepage</label>
+        <select
+          class="language-control__select"
+          id="homepage-language"
+          aria-label="Selecionar idioma da homepage"
+        >
+          <option value="pt-BR">Português brasileiro</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+          <option value="nl">Nederlands</option>
+          <option value="pl">Polski</option>
+          <option value="ru">Русский</option>
+          <option value="uk">Українська</option>
+          <option value="tr">Türkçe</option>
+          <option value="ar">العربية</option>
+          <option value="hi">हिन्दी</option>
+          <option value="bn">বাংলা</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="th">ไทย</option>
+        </select>
+      </div>
 
       <a
         class="button button--primary site-header__cta"
@@ -485,6 +527,7 @@
     </div>
   </footer>
 
+  <script src="homepage/js/homepage-i18n.js" defer></script>
   <script src="homepage/js/homepage.js" defer></script>
 </body>
 </html>
