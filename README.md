@@ -26,7 +26,7 @@ Flag Game is an open source geography game focused on helping players recognize 
 - 🌐 Web: https://flaggameapp.github.io/flaggameapp/
 - 📱 Android: *(official link will be added after publication)*
 - 🧩 Chrome Extension: *(official link will be added after publication)*
-- 
+  
 > The homepage automatically shows official download links as they become available.
 
 ## 🌍 Supported Languages
