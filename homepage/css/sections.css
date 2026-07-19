@@ -376,6 +376,107 @@
   margin-top: var(--space-2);
 }
 
+.platform-card--extensions {
+  align-content: start;
+}
+
+.browser-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.browser-option {
+  display: grid;
+  min-height: 5.25rem;
+  align-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.browser-option[href]:hover,
+.browser-option[href]:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.browser-option[href]:active {
+  transform: translateY(1px);
+}
+
+.browser-option.is-current {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+}
+
+.browser-option[aria-disabled="true"] {
+  background: var(--color-surface-subtle);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.browser-option[aria-disabled="true"]:focus-visible {
+  outline: 3px solid var(--color-primary-soft);
+  outline-offset: 3px;
+}
+
+.browser-option__icon {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.12);
+}
+
+.browser-option__icon--chrome {
+  background-image: url("../../assets/images/chrome.png");
+}
+
+.browser-option__icon--edge {
+  background-image: url("../../assets/images/edge.png");
+}
+
+.browser-option__icon--firefox {
+  background-image: url("../../assets/images/firefox.png");
+}
+
+.browser-option__name {
+  font-size: var(--font-size-0);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.browser-option__status {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.browser-option[href] .browser-option__status {
+  display: none;
+}
+
 .faq-list {
   display: grid;
   gap: var(--space-3);

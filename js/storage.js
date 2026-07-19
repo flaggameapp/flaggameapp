@@ -155,10 +155,12 @@ const FlagGameStorage = (() => {
 
   return {
     createEventId,
+    getRaw,
     getJson,
     getString,
     has,
     remove,
+    setRaw,
     setJson,
     setString
   };

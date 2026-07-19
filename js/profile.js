@@ -164,7 +164,8 @@ const FlagGameProfile = (() => {
       modes: {
         continent: { gamesPlayed: 0 },
         world: { gamesPlayed: 0 },
-        expert: { gamesPlayed: 0 }
+        expert: { gamesPlayed: 0 },
+        world_challenge: { gamesPlayed: 0 }
       },
       continentsCompleted: {},
       continentsPerfect: {},
@@ -251,6 +252,18 @@ const FlagGameProfile = (() => {
     return profile;
   }
 
+  function toSafeNumber(value, fallback = 0) {
+    const number = Number(value);
+
+    return Number.isFinite(number)
+      ? Math.max(0, number)
+      : fallback;
+  }
+
+  function toSafeInteger(value, fallback = 0) {
+    return Math.floor(toSafeNumber(value, fallback));
+  }
+
   function evaluateAchievements(profile) {
     const unlockedNow = [];
     const unlockedAt = new Date().toISOString();
@@ -274,8 +287,21 @@ const FlagGameProfile = (() => {
       gameResult.eventId || FlagGameStorage.createEventId();
     const mode = gameResult.mode || "continent";
     const durationSeconds =
-      Number(gameResult.durationSeconds || 0);
-    const percent = Number(gameResult.percent || 0);
+      toSafeInteger(gameResult.durationSeconds, 0);
+    const correct = toSafeInteger(gameResult.correct, 0);
+    const total = toSafeInteger(gameResult.total, 0);
+    const percent = Math.min(
+      100,
+      toSafeNumber(gameResult.percent, 0)
+    );
+    const bestStreak = toSafeInteger(gameResult.bestStreak, 0);
+    const wrongAnswers = toSafeInteger(gameResult.wrongAnswers, 0);
+    const skips = toSafeInteger(gameResult.skips, 0);
+    const livesRemaining = toSafeInteger(gameResult.livesRemaining, 0);
+    const isWorldChallenge = mode === "world_challenge";
+    const isPerfectGame = isWorldChallenge
+      ? correct === total && wrongAnswers === 0 && skips === 0
+      : percent === 100;
 
     if (profile.events.recorded[eventId]) {
       return {
@@ -285,19 +311,23 @@ const FlagGameProfile = (() => {
     }
 
     profile.totals.gamesPlayed++;
-    profile.totals.totalCorrect += gameResult.correct;
-    profile.totals.totalQuestions += gameResult.total;
+    profile.totals.totalCorrect += correct;
+    profile.totals.totalQuestions += total;
     profile.totals.percentSum += percent;
     profile.totals.bestStreak = Math.max(
       profile.totals.bestStreak,
-      gameResult.bestStreak || 0
+      bestStreak
     );
 
-    if (percent === 100) {
+    if (isPerfectGame) {
       profile.totals.perfectGames++;
     }
 
-    if (gameResult.total >= 195) {
+    if (
+      isWorldChallenge
+        ? gameResult.completedFullRun195 === true
+        : total >= 195
+    ) {
       profile.totals.fullRuns195++;
     }
 
@@ -327,11 +357,15 @@ const FlagGameProfile = (() => {
       eventId,
       mode,
       continent: gameResult.continent || "",
-      correct: gameResult.correct,
-      total: gameResult.total,
+      correct,
+      total,
       percent,
-      bestStreak: gameResult.bestStreak || 0,
+      bestStreak,
       durationSeconds,
+      wrongAnswers,
+      skips,
+      livesRemaining,
+      completedFullRun195: gameResult.completedFullRun195 === true,
       createdAt: new Date().toISOString()
     };
 
@@ -464,6 +498,8 @@ const FlagGameProfile = (() => {
   }
 
   return {
+    readProfile,
+    saveProfile,
     getAchievements,
     getAchievementSummary,
     getRankingPayload,

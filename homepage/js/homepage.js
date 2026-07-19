@@ -12,7 +12,9 @@
     webGameUrl: "game/",
     publicWebGameUrl: "game/",
     googlePlayUrl: "",
-    chromeWebStoreUrl: "",
+    chromeWebStoreUrl: "https://chromewebstore.google.com/detail/flag-game/ebbjejglingjlbbkigfbbpedlplabchi",
+    edgeAddonsUrl: "",
+    firefoxAddonsUrl: "",
     githubUrl: ""
   };
 
@@ -46,16 +48,77 @@
       if (url) {
         link.setAttribute("href", url);
         link.removeAttribute("aria-disabled");
+        link.removeAttribute("tabindex");
         link.removeAttribute("hidden");
         return;
       }
 
       link.removeAttribute("href");
       link.setAttribute("aria-disabled", "true");
+      link.setAttribute("tabindex", "0");
 
       if (link.hasAttribute("data-optional-link")) {
         link.setAttribute("hidden", "");
       }
+    });
+  }
+
+  function detectBrowser() {
+    const userAgent = navigator.userAgent || "";
+
+    if (/Edg\//.test(userAgent)) {
+      return "edge";
+    }
+
+    if (/Firefox\//.test(userAgent)) {
+      return "firefox";
+    }
+
+    if (/Chrome\//.test(userAgent) || /CriOS\//.test(userAgent)) {
+      return "chrome";
+    }
+
+    return "";
+  }
+
+  function setupBrowserOptions() {
+    const currentBrowser = detectBrowser();
+
+    document.querySelectorAll("[data-browser-option]").forEach(option => {
+      const browser = option.dataset.browserOption;
+      const key = option.dataset.homepageLink;
+      const url = homepageLinks[key];
+      const browserName =
+        option.querySelector(".browser-option__name")?.textContent.trim() ||
+        browser;
+
+      option.classList.toggle(
+        "is-current",
+        Boolean(url && browser === currentBrowser)
+      );
+      option.toggleAttribute(
+        "aria-current",
+        Boolean(url && browser === currentBrowser)
+      );
+
+      if (!url) {
+        option.setAttribute("aria-label", `${browserName} - Em breve`);
+      }
+
+      option.addEventListener("click", event => {
+        if (!option.getAttribute("href")) {
+          event.preventDefault();
+        }
+      });
+
+      option.addEventListener("keydown", event => {
+        if (
+          !option.getAttribute("href") &&
+          (event.key === "Enter" || event.key === " ")
+        ) {
+          event.preventDefault();
+        }
+      });
     });
   }
 
@@ -227,6 +290,7 @@
   }
 
   applyConfiguredLinks();
+  setupBrowserOptions();
   setupPlatformCards();
   setupNavigation();
   setupCurrentSection();
