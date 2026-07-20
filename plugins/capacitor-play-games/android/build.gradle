@@ -1,0 +1,26 @@
+plugins {
+    id 'com.android.library'
+}
+
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+android {
+    namespace 'app.flaggame.playgames'
+    compileSdk safeExtGet('compileSdkVersion', 35)
+
+    defaultConfig {
+        minSdkVersion safeExtGet('minSdkVersion', 23)
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly project(':capacitor-android')
+    implementation 'com.google.android.gms:play-services-games-v2:21.0.0'
+}

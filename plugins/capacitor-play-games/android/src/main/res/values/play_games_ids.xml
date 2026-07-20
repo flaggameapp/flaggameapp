@@ -1,0 +1,16 @@
+<resources>
+    <string name="leaderboard_world_challenge_progress" translatable="false"></string>
+    <string name="leaderboard_world_challenge_streak" translatable="false"></string>
+    <string name="leaderboard_world_challenge_fastest_195" translatable="false"></string>
+
+    <string name="achievement_world_challenge_first_attempt" translatable="false"></string>
+    <string name="achievement_world_challenge_countries_25" translatable="false"></string>
+    <string name="achievement_world_challenge_countries_50" translatable="false"></string>
+    <string name="achievement_world_challenge_countries_100" translatable="false"></string>
+    <string name="achievement_world_challenge_countries_150" translatable="false"></string>
+    <string name="achievement_world_challenge_countries_195" translatable="false"></string>
+    <string name="achievement_world_challenge_streak_50" translatable="false"></string>
+    <string name="achievement_world_challenge_streak_100" translatable="false"></string>
+    <string name="achievement_world_challenge_complete_one_life" translatable="false"></string>
+    <string name="achievement_world_challenge_complete_no_lives_lost" translatable="false"></string>
+</resources>
