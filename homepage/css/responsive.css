@@ -1,0 +1,157 @@
+@media (min-width: 48rem) {
+  .site-header__inner {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+  }
+
+  .no-js .site-nav {
+    grid-column: auto;
+  }
+
+  .site-nav {
+    justify-self: center;
+  }
+
+  .site-header__cta {
+    grid-column: auto;
+    width: auto;
+  }
+
+  .site-footer__inner {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .feature-strip,
+  .mode-grid,
+  .platform-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .progress-layout,
+  .challenge-layout,
+  .languages-layout,
+  .faq-layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+
+  .achievements-layout {
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 64rem) {
+  .site-nav__toggle,
+  .js .site-nav__toggle {
+    display: none;
+  }
+
+  .site-nav__list,
+  .js .site-nav__list {
+    display: flex;
+    position: static;
+    gap: var(--space-2);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .site-nav__list a {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .brand-link__logo {
+    width: 10rem;
+  }
+
+  .hero-grid,
+  .demo-layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1fr);
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: var(--font-size-6);
+  }
+
+  .feature-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .feature-strip li {
+    padding-inline: var(--space-4);
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .feature-strip li:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .mode-grid,
+  .platform-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gameplay-panel {
+    grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.6fr);
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 96rem) {
+  .container {
+    width: min(100% - (var(--container-padding) * 2), var(--container-xl));
+  }
+}
+
+@media (max-width: 70rem) {
+  .browser-options {
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  }
+}
+
+@media (max-width: 23.375rem) {
+  .site-header__inner {
+    gap: var(--space-3);
+  }
+
+  .site-nav__toggle,
+  .button {
+    min-height: 2.875rem;
+  }
+
+  .site-header__cta {
+    padding-inline: var(--space-3);
+  }
+
+  .hero-actions .button,
+  .final-cta .button,
+  .platform-card .button {
+    width: 100%;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.15rem;
+  }
+
+  .mockup-options {
+    grid-template-columns: 1fr;
+  }
+
+  .browser-options {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading__title {
+    font-size: 2rem;
+  }
+
+  .homepage-section {
+    padding-block: var(--space-6);
+  }
+}
