@@ -233,6 +233,11 @@
   margin-top: var(--space-6);
 }
 
+.platform-grid {
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
 .mode-card,
 .platform-card {
   display: grid;
@@ -561,4 +566,13 @@
   .flag-stage {
     min-height: 8rem;
   }
+}
+
+.platform-card {
+  justify-content: space-between;
+}
+
+.platform-card > .button,
+.platform-card > .browser-options {
+  margin-top: auto;
 }

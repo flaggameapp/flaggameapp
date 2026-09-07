@@ -93,9 +93,12 @@
     padding-left: 0;
   }
 
-  .mode-grid,
-  .platform-grid {
+  .mode-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .platform-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .gameplay-panel {

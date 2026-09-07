@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flaggameapp.github.io/flaggameapp/sitemap.xml

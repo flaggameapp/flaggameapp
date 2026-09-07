@@ -105,9 +105,8 @@
       challenge: ["Código de exemplo", "Modo, quantidade e sequência preservados. Resultados e comparações são locais nesta versão."],
       languagesAria: "Idiomas suportados",
       languagesHead: ["Idiomas", "O mundo inteiro pode jogar", "O Flag Game já oferece suporte a 20 idiomas, com seleção automática e preferência salva localmente."],
-      platformsHead: ["Plataformas", "Jogue onde preferir", "Jogue pela versão Web, aplicativo Android ou extensão para navegador."],
+      platformsHead: ["Plataformas", "Jogue onde preferir", "Jogue pelo aplicativo Android ou extensão para navegador."],
       platforms: [
-        ["Web", "Jogar no navegador", "Abra o Flag Game direto na Web e comece sem criar conta.", "Jogar agora"],
         ["Android", "Baixar na Google Play", "Use o Flag Game no Android pelo link oficial da loja.", "Baixar na Google Play"],
         ["Extensão", "Instale no seu navegador", "Jogue rapidamente pelo Chrome, Edge ou Firefox.", ""]
       ],
@@ -166,8 +165,8 @@
       challenge: ["Example code", "Mode, amount, and sequence preserved. Results and comparisons are local in this version."],
       languagesAria: "Supported languages",
       languagesHead: ["Languages", "The whole world can play", "Flag Game already supports 20 languages, with automatic selection and a locally saved preference."],
-      platformsHead: ["Platforms", "Play where you prefer", "Play on the Web, Android app, or browser extension."],
-      platforms: [["Web", "Play in the browser", "Open Flag Game directly on the Web and start without creating an account.", "Play now"], ["Android", "Get it on Google Play", "Use Flag Game on Android through the official store link.", "Get it on Google Play"], ["Extension", "Install in your browser", "Play quickly through Chrome, Edge, or Firefox.", ""]],
+      platformsHead: ["Platforms", "Play where you prefer", "Play with the Android app or browser extension."],
+      platforms: [["Android", "Get it on Google Play", "Use Flag Game on Android through the official store link.", "Get it on Google Play"], ["Extension", "Install in your browser", "Play quickly through Chrome, Edge, or Firefox.", ""]],
       faqHead: ["Frequently asked questions", "Everything you need to know"],
       faq: [["How many flags are in Flag Game?", "The game brings together the flags of 195 internationally recognized countries, with continent challenges or a complete round with all countries."], ["Do I need to create an account?", "No. You can start playing immediately, without registration, login, or account creation."], ["Is my progress saved?", "Yes. Your stats, achievements, records, streak, favorite mode, and other profile information are saved automatically on this device."], ["Does the game work without internet?", "Yes. The main features were built to work locally after the game files load, so you can keep playing without a connection in many situations."], ["Which game modes are available?", "You can play by continent, challenge yourself in Worldwide mode with 10, 20, 50, or 195 flags, or test your knowledge in Expert Mode by typing each country name."], ["Is there an online ranking?", "The current version does not have a public online ranking. Your progress and stats are stored locally on this device."]],
       final: ["Start now", "How many of the 195 flags do you recognize today?", "Open a match and watch your progress improve round by round.", "Play Flag Game now"],
@@ -376,7 +375,6 @@
     copy.languagesHead = [values[15], values[16], values[16]];
     copy.platformsHead = [values[17], values[18], values[18]];
     copy.platforms = [
-      ["Web", values[3], values[18], values[3]],
       ["Android", "Google Play", values[18], "Google Play"],
       ["Extension", "Browser extension", values[18], ""]
     ];
