@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://flaggameapp.github.io/flaggameapp/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://flaggameapp.github.io/flaggameapp/?lang=pt-BR"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://flaggameapp.github.io/flaggameapp/?lang=pt-BR"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flaggameapp.github.io/flaggameapp/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://flaggameapp.github.io/flaggameapp/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://flaggameapp.github.io/flaggameapp/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://flaggameapp.github.io/flaggameapp/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://flaggameapp.github.io/flaggameapp/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://flaggameapp.github.io/flaggameapp/?lang=nl"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flaggameapp.github.io/flaggameapp/?lang=pl"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://flaggameapp.github.io/flaggameapp/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://flaggameapp.github.io/flaggameapp/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://flaggameapp.github.io/flaggameapp/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://flaggameapp.github.io/flaggameapp/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://flaggameapp.github.io/flaggameapp/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://flaggameapp.github.io/flaggameapp/?lang=hi"/>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://flaggameapp.github.io/flaggameapp/?lang=bn"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://flaggameapp.github.io/flaggameapp/?lang=th"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://flaggameapp.github.io/flaggameapp/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://flaggameapp.github.io/flaggameapp/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://flaggameapp.github.io/flaggameapp/?lang=zh-CN"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://flaggameapp.github.io/flaggameapp/?lang=id"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flaggameapp.github.io/flaggameapp/"/>
+  </url>
+  <url>
+    <loc>https://flaggameapp.github.io/flaggameapp/game/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

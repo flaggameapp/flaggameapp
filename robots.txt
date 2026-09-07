@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap URL intentionally omitted until the public site URL is defined.
+Sitemap: https://flaggameapp.github.io/flaggameapp/sitemap.xml
