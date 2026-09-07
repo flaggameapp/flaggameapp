@@ -1,0 +1,24 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:1:1-7:12
+	package
+		INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:2:5-6:19
+meta-data#com.google.android.gms.games.APP_ID
+ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:3:9-5:64
+	android:value
+		ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:5:13-61
+	android:name
+		ADDED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml:4:13-63
+uses-sdk
+INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml
+INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Bandeiras\plugins\capacitor-play-games\android\src\main\AndroidManifest.xml
