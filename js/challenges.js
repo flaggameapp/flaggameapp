@@ -132,15 +132,26 @@ const FlagGameChallenge = (() => {
   }
 
   function buildQuestions(allCountries, config) {
+    if (Array.isArray(config.questionCodes) && config.questionCodes.length) {
+      const countriesByCode = new Map(
+        allCountries.map(country => [country.code, country])
+      );
+
+      return config.questionCodes
+        .map(code => countriesByCode.get(String(code || "").toUpperCase()))
+        .filter(Boolean);
+    }
+
     const source = config.mode === "world"
       ? allCountries
       : allCountries.filter(
         country => country.continent === config.continent
       );
 
+    const sequenceSeed = config.sequenceSeed || config.seed || config.code;
     const questions = deterministicShuffle(
       [...source],
-      `${config.code}:flags`
+      `${sequenceSeed}:flags`
     );
 
     return config.mode === "world"
@@ -238,3 +249,5 @@ const FlagGameChallenge = (() => {
     saveLocalResult
   };
 })();
+
+window.FlagGameChallenge = FlagGameChallenge;

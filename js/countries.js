@@ -205,3 +205,5 @@ const countries = [
   { code: "TV", name: "Tuvalu", continent: "oceania", flagFile: "tv.svg" },
   { code: "VU", name: "Vanuatu", continent: "oceania", flagFile: "vu.svg" }
 ];
+
+globalThis.countries = countries;

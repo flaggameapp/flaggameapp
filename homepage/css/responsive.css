@@ -64,7 +64,8 @@
   }
 
   .brand-link__logo {
-    width: 10rem;
+    width: 11.5rem;
+    max-height: 4.5rem;
   }
 
   .hero-grid,

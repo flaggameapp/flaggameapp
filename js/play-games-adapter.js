@@ -83,6 +83,7 @@
 
     return {
       available: source.available === true,
+      configured: source.configured === true,
       authenticated: source.authenticated === true,
       status: String(source.status || (source.available === true ? "available" : "unavailable")),
       playServicesStatus: source.playServicesStatus,
@@ -95,6 +96,7 @@
       achievementKey: source.achievementKey || null,
       score: source.score,
       resourceKey: source.resourceKey || null,
+      feature: source.feature || null,
       method,
       error: source.error || null
     };
@@ -134,34 +136,13 @@
       return Boolean(isAndroidPlatform() && getNativePlugin());
     },
     get leaderboards() {
-      const nativePlugin = getNativePlugin();
-
-      return Boolean(
-        isAndroidPlatform() &&
-        nativePlugin &&
-        typeof nativePlugin.submitLeaderboardScore === "function" &&
-        typeof nativePlugin.openLeaderboards === "function"
-      );
+      return false;
     },
     get cloudSave() {
-      const nativePlugin = getNativePlugin();
-
-      return Boolean(
-        isAndroidPlatform() &&
-        nativePlugin &&
-        typeof nativePlugin.syncSavedGame === "function" &&
-        typeof nativePlugin.commitSavedGame === "function"
-      );
+      return false;
     },
     get achievements() {
-      const nativePlugin = getNativePlugin();
-
-      return Boolean(
-        isAndroidPlatform() &&
-        nativePlugin &&
-        typeof nativePlugin.unlockAchievement === "function" &&
-        typeof nativePlugin.openAchievements === "function"
-      );
+      return false;
     },
     isAvailable() {
       return callNative("isAvailable");

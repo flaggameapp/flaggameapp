@@ -1,52 +1,52 @@
 (function () {
-  const STORAGE_KEY = "language";
+  const USER_SELECTED_KEY = "homepage_user_selected_language";
 
   const SUPPORTED_LANGUAGES = [
-    "pt-BR",
+    "id",
+    "de",
     "en",
     "es",
     "fr",
-    "de",
     "it",
     "nl",
     "pl",
+    "pt-BR",
+    "vi",
+    "tr",
     "ru",
     "uk",
-    "tr",
     "ar",
     "hi",
     "bn",
-    "zh-CN",
-    "ja",
+    "th",
     "ko",
-    "id",
-    "vi",
-    "th"
+    "ja",
+    "zh-CN"
   ];
 
   const DEFAULT_LANGUAGE = "en";
 
   const LANGUAGE_NAMES = {
-    "pt-BR": "Português brasileiro",
-    en: "English",
-    es: "Español",
-    fr: "Français",
-    de: "Deutsch",
-    it: "Italiano",
-    nl: "Nederlands",
-    pl: "Polski",
-    ru: "Русский",
-    uk: "Українська",
-    tr: "Türkçe",
-    ar: "العربية",
-    hi: "हिन्दी",
-    bn: "বাংলা",
-    "zh-CN": "简体中文",
-    ja: "日本語",
-    ko: "한국어",
-    id: "Bahasa Indonesia",
-    vi: "Tiếng Việt",
-    th: "ไทย"
+    "id": "Bahasa Indonesia",
+    "de": "Deutsch",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "it": "Italiano",
+    "nl": "Nederlands",
+    "pl": "Polski",
+    "pt-BR": "Português",
+    "vi": "Tiếng Việt",
+    "tr": "Türkçe",
+    "ru": "Русский",
+    "uk": "Українська",
+    "ar": "العربية",
+    "hi": "हिन्दी",
+    "bn": "বাংলা",
+    "th": "ไทย",
+    "ko": "한국어",
+    "ja": "日本語",
+    "zh-CN": "简体中文"
   };
 
   const COPY = {
@@ -396,25 +396,34 @@
   });
 
   function normalizeLanguage(language) {
-    if (!language) {
+    if (!language || typeof language !== "string") {
       return "";
     }
 
-    if (SUPPORTED_LANGUAGES.includes(language)) {
-      return language;
+    const cleaned = language.trim().replace(/_/g, "-");
+    const lower = cleaned.toLowerCase();
+
+    for (const supported of SUPPORTED_LANGUAGES) {
+      if (supported.toLowerCase() === lower) {
+        return supported;
+      }
     }
 
-    const shortLanguage = language.split("-")[0];
-
-    if (shortLanguage === "pt") {
+    const primary = lower.split("-")[0];
+    if (primary === "pt") {
       return "pt-BR";
     }
-
-    if (shortLanguage === "zh") {
+    if (primary === "zh") {
       return "zh-CN";
     }
 
-    return SUPPORTED_LANGUAGES.includes(shortLanguage) ? shortLanguage : "";
+    for (const supported of SUPPORTED_LANGUAGES) {
+      if (supported.toLowerCase() === primary) {
+        return supported;
+      }
+    }
+
+    return "";
   }
 
   function getStoredLanguage() {
@@ -422,11 +431,11 @@
       window.FlagGameStorage &&
       typeof window.FlagGameStorage.getString === "function"
     ) {
-      return normalizeLanguage(window.FlagGameStorage.getString(STORAGE_KEY, ""));
+      return normalizeLanguage(window.FlagGameStorage.getString(USER_SELECTED_KEY, ""));
     }
 
     try {
-      return normalizeLanguage(window.localStorage.getItem(STORAGE_KEY));
+      return normalizeLanguage(window.localStorage.getItem(USER_SELECTED_KEY));
     } catch (error) {
       return "";
     }
@@ -437,31 +446,61 @@
       window.FlagGameStorage &&
       typeof window.FlagGameStorage.setString === "function"
     ) {
-      window.FlagGameStorage.setString(STORAGE_KEY, language);
+      window.FlagGameStorage.setString(USER_SELECTED_KEY, language);
       return;
     }
 
     try {
-      window.localStorage.setItem(STORAGE_KEY, language);
+      window.localStorage.setItem(USER_SELECTED_KEY, language);
     } catch (error) {
       // localStorage can be unavailable in restrictive contexts.
     }
   }
 
   function detectLanguage() {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get("lang");
+      if (urlLang) {
+        const normalizedUrlLang = normalizeLanguage(urlLang);
+        if (normalizedUrlLang) {
+          return normalizedUrlLang;
+        }
+      }
+    } catch (error) {}
+
     const storedLanguage = getStoredLanguage();
 
     if (storedLanguage) {
       return storedLanguage;
     }
 
-    const browserLanguages =
-      navigator.languages && navigator.languages.length
-        ? navigator.languages
-        : [navigator.language];
+    const candidates = [];
 
-    for (const language of browserLanguages) {
-      const normalizedLanguage = normalizeLanguage(language);
+    if (Array.isArray(navigator.languages)) {
+      candidates.push(...navigator.languages);
+    }
+    if (navigator.language) {
+      candidates.push(navigator.language);
+    }
+    if (navigator.userLanguage) {
+      candidates.push(navigator.userLanguage);
+    }
+    if (navigator.browserLanguage) {
+      candidates.push(navigator.browserLanguage);
+    }
+    if (
+      typeof chrome !== "undefined" &&
+      chrome.i18n &&
+      typeof chrome.i18n.getUILanguage === "function"
+    ) {
+      try {
+        candidates.push(chrome.i18n.getUILanguage());
+      } catch (e) {}
+    }
+
+    for (const candidate of candidates) {
+      const normalizedLanguage = normalizeLanguage(candidate);
 
       if (normalizedLanguage) {
         return normalizedLanguage;
@@ -676,9 +715,31 @@
     }
   }
 
+  function sortSelectOptions(select) {
+    if (!select) {
+      return;
+    }
+
+    const currentVal = select.value;
+    const options = Array.from(select.options);
+
+    options.sort((a, b) => a.text.localeCompare(b.text, "pt-BR"));
+    select.innerHTML = "";
+    options.forEach(opt => select.appendChild(opt));
+
+    if (currentVal) {
+      select.value = currentVal;
+    }
+  }
+
   function initializeHomepageLanguage() {
-    const initialLanguage = detectLanguage();
     const select = document.querySelector("#homepage-language");
+
+    if (select) {
+      sortSelectOptions(select);
+    }
+
+    const initialLanguage = detectLanguage();
 
     applyLanguage(initialLanguage);
 

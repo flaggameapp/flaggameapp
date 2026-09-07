@@ -11,10 +11,10 @@
   const defaultHomepageLinks = {
     webGameUrl: "game/",
     publicWebGameUrl: "game/",
-    googlePlayUrl: "",
-    chromeWebStoreUrl: "https://chromewebstore.google.com/detail/flag-game/ebbjejglingjlbbkigfbbpedlplabchi",
-    edgeAddonsUrl: "",
-    firefoxAddonsUrl: "",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=flaggame.app",
+    chromeWebStoreUrl: "https://chromewebstore.google.com/detail/flag-game/ebbjejglingjlbbkigfbbpedlplabchi?hl=pt-br",
+    edgeAddonsUrl: "https://microsoftedge.microsoft.com/addons/detail/ciaecdoieddpanjmkbmohgkomifdcheg",
+    firefoxAddonsUrl: "https://addons.mozilla.org/pt-BR/firefox/addon/flag-game/",
     githubUrl: ""
   };
 

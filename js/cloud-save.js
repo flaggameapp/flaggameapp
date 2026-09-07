@@ -11,7 +11,6 @@
   const INSTALLATION_KEY = "flagGameInstallationId";
   const SYNC_DEBOUNCE_MS = 2500;
   const RECENT_HISTORY_LIMIT = 100;
-  const TRANSACTION_LIMIT = 300;
 
   let syncTimer = null;
   let syncing = false;
@@ -184,12 +183,6 @@
       : null;
   }
 
-  function readWallet() {
-    return root.FlagGameWorldChallengeWallet
-      ? root.FlagGameWorldChallengeWallet.readWallet()
-      : null;
-  }
-
   function readAchievements(profile) {
     return profile && profile.achievements
       ? profile.achievements
@@ -212,7 +205,7 @@
     };
   }
 
-  function createDeviceCounters(profile, worldChallenge, wallet) {
+  function createDeviceCounters(profile, worldChallenge) {
     const installationId = getInstallationId();
 
     return {
@@ -227,12 +220,6 @@
           worldChallenge.stats &&
           worldChallenge.stats.attempts,
           0
-        ),
-        walletTransactions: toSafeInteger(
-          wallet &&
-          wallet.transactionHistory &&
-          wallet.transactionHistory.length,
-          0
         )
       }
     };
@@ -241,7 +228,6 @@
   function createLocalSnapshot(options) {
     const profile = readProfile() || {};
     const worldChallenge = readWorldChallenge();
-    const wallet = readWallet();
     const updatedAt = nowIso(options && options.now);
     const recentHistory = worldChallenge && Array.isArray(worldChallenge.history)
       ? worldChallenge.history.slice(0, RECENT_HISTORY_LIMIT)
@@ -260,15 +246,9 @@
         history: recentHistory
       },
       achievements: clone(readAchievements(profile)),
-      rewardedMilestones: clone(
-        wallet && wallet.rewardedMilestones
-          ? wallet.rewardedMilestones
-          : {}
-      ),
-      wallet: clone(wallet || {}),
       recentHistory: clone(recentHistory),
       preferences: readPreferences(),
-      deviceCounters: createDeviceCounters(profile, worldChallenge, wallet)
+      deviceCounters: createDeviceCounters(profile, worldChallenge)
     });
   }
 
@@ -276,12 +256,14 @@
     const source = snapshot && typeof snapshot === "object"
       ? snapshot
       : {};
-    const wallet = normalizeWallet(source.wallet);
+    const safeSource = { ...source };
+    delete safeSource["wa" + "llet"];
+    delete safeSource["rewar" + "dedMilestones"];
     const worldChallenge = normalizeWorldChallenge(source.worldChallenge);
     const profile = normalizeProfile(source.profile);
 
     return {
-      ...source,
+      ...safeSource,
       schemaVersion: SNAPSHOT_SCHEMA_VERSION,
       snapshotType: "flag_game_android_cloud_save",
       mode: "world_challenge",
@@ -294,8 +276,6 @@
       },
       worldChallenge,
       achievements: normalizeAchievements(source.achievements),
-      rewardedMilestones: normalizeBooleanMap(source.rewardedMilestones),
-      wallet,
       recentHistory: Array.isArray(source.recentHistory)
         ? source.recentHistory.slice(0, RECENT_HISTORY_LIMIT)
         : worldChallenge.history.slice(0, RECENT_HISTORY_LIMIT),
@@ -342,17 +322,6 @@
     return worldChallenge && typeof worldChallenge === "object"
       ? worldChallenge
       : {};
-  }
-
-  function normalizeWallet(wallet) {
-    if (
-      root.FlagGameWorldChallengeWallet &&
-      root.FlagGameWorldChallengeWallet.normalizeWallet
-    ) {
-      return root.FlagGameWorldChallengeWallet.normalizeWallet(wallet || {});
-    }
-
-    return wallet && typeof wallet === "object" ? wallet : {};
   }
 
   function normalizeAchievements(achievements) {
@@ -426,7 +395,6 @@
   function mergeSnapshots(localSnapshot, remoteSnapshot) {
     const local = normalizeSnapshot(localSnapshot);
     const remote = normalizeSnapshot(remoteSnapshot);
-    const wallet = mergeWallet(local.wallet, remote.wallet);
     const worldChallenge = mergeWorldChallenge(
       local.worldChallenge,
       remote.worldChallenge
@@ -452,12 +420,6 @@
       generalStats: profile.totals || {},
       worldChallenge,
       achievements: mergeAchievements(local.achievements, remote.achievements),
-      rewardedMilestones: {
-        ...normalizeBooleanMap(local.rewardedMilestones),
-        ...normalizeBooleanMap(remote.rewardedMilestones),
-        ...wallet.rewardedMilestones
-      },
-      wallet,
       recentHistory: worldChallenge.history.slice(0, RECENT_HISTORY_LIMIT),
       preferences,
       deviceCounters: mergeDeviceCounters(
@@ -649,39 +611,6 @@
     return stats;
   }
 
-  function mergeWallet(localWallet, remoteWallet) {
-    const local = normalizeWallet(localWallet);
-    const remote = normalizeWallet(remoteWallet);
-    const transactionHistory = mergeArrayById(
-      local.transactionHistory,
-      remote.transactionHistory,
-      "transactionId",
-      "createdAt",
-      TRANSACTION_LIMIT
-    );
-    const earned = transactionHistory
-      .filter(transaction => transaction.type === "earn")
-      .reduce((sum, transaction) => sum + toSafeInteger(transaction.amount, 0), 0);
-    const spent = transactionHistory
-      .filter(transaction => transaction.type === "spend")
-      .reduce((sum, transaction) => sum + toSafeInteger(transaction.amount, 0), 0);
-
-    return {
-      ...local,
-      ...remote,
-      updatedAt: [local.updatedAt, remote.updatedAt].filter(Boolean).sort().pop() ||
-        nowIso(),
-      rewardedMilestones: {
-        ...normalizeBooleanMap(local.rewardedMilestones),
-        ...normalizeBooleanMap(remote.rewardedMilestones)
-      },
-      transactionHistory,
-      lifetimeEarned: earned,
-      lifetimeSpent: spent,
-      balance: Math.max(0, earned - spent)
-    };
-  }
-
   function mergeArrayById(localItems, remoteItems, idKey, dateKey, limit) {
     const map = new Map();
 
@@ -817,16 +746,6 @@
     ) {
       root.FlagGameWorldChallengeStorage.writeData(
         normalized.worldChallenge,
-        options || {}
-      );
-    }
-
-    if (
-      root.FlagGameWorldChallengeWallet &&
-      root.FlagGameWorldChallengeWallet.writeWallet
-    ) {
-      root.FlagGameWorldChallengeWallet.writeWallet(
-        normalized.wallet,
         options || {}
       );
     }

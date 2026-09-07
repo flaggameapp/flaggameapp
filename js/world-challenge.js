@@ -1,6 +1,6 @@
 /*
  * Pure logic engine for Desafio Mundial - Modo Experiente.
- * This file intentionally does not touch DOM, storage, ranking, coins, or
+ * This file intentionally does not touch DOM, storage, ranking, or
  * Google Play Games. The legacy expert mode remains identified as "expert".
  */
 (function (global) {

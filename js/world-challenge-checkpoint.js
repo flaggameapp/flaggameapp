@@ -1,7 +1,7 @@
 /*
  * Local checkpoint support for Desafio Mundial.
  * This stores only resumable run state. It does not write profile history,
- * grant coins, submit ranking data, or touch Google Play Games.
+ * submit ranking data, or touch Google Play Games.
  */
 (function (global) {
   "use strict";
